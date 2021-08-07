@@ -1,5 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="/WEB-INF/tlds/JavaWebtag_library" prefix="tag"%>
 <!DOCTYPE html>
 <html>
     <head>

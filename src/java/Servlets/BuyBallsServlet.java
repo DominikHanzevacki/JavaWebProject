@@ -38,7 +38,9 @@ public class BuyBallsServlet extends HttpServlet {
             out.println("<title>Servlet BuyBallsServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BuyBallsServlet at " + request.getContextPath() + "</h1>");
+            out.println("<table class=\"table-dark\">");
+            
+            out.println("</table>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,8 +58,7 @@ public class BuyBallsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        //response.sendRedirect("BuyBalss.jsp");
+            response.sendRedirect("BuyBallsPage.jsp");
     }
 
     /**

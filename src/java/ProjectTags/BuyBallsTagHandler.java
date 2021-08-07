@@ -5,9 +5,14 @@
  */
 package ProjectTags;
 
+import Models.Ball;
+import SQL.SqlRepository;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
@@ -16,16 +21,33 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  */
 public class BuyBallsTagHandler extends SimpleTagSupport {
 
-    /**
-     * Called by the container to invoke this tag. The implementation of this
-     * method is provided by the tag library developer, and handles all tag
-     * processing, body iteration, etc.
-     */
+    SqlRepository sql = new SqlRepository();
+
     @Override
     public void doTag() throws JspException {
         JspWriter out = getJspContext().getOut();
-        
-        
+        try {
+            List<Ball> ball = sql.selectAllBalls();
+            ball.forEach((b) -> {
+                try {
+                    out.println("<div class=\"col\">");
+                    out.println("<div class=\"card h-100\">");
+                    out.println("<img src=\"...\" class=\"card-img-top\" alt=\"...\">");
+                    out.println("<div class=\"card-body\">");
+                    out.println("<h5 class=\"card-title\">" + b.getBallName() + "</h5>");
+                    out.println("<p class=\"card-text\">This is </p>");
+                    out.println("</div>");
+                    out.println("</div>");
+                    out.println("</div>");
+                } catch (IOException ex) {
+                    Logger.getLogger(BuyBallsTagHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+
+        } catch (Exception ex) {
+            Logger.getLogger(BuyBallsTagHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
-    
+
 }

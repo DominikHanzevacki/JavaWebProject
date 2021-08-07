@@ -1,0 +1,23 @@
+html,body {
+    height:100%;
+    width:100%;
+}
+body {
+    background-color: black;
+}
+.navbar-collapse {
+    text-align: right;
+}
+#BuyBallsHeader {
+    width:100%;
+}
+.navbar-dark .navbar-brand:hover{
+    color: lightgrey;
+}
+.bg-dark {
+    opacity: 0.8;
+    color: white!important;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color:white;
+}

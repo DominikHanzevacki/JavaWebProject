@@ -4,12 +4,12 @@ html,body {
 }
 body {
     overflow: hidden;
+    background-color: black;
 }
 .navbar-collapse {
     text-align: right;
 }
 header {
-    height: 100%;
     width:100%;
     position: fixed;
     z-index: 1;
