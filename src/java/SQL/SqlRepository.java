@@ -70,7 +70,7 @@ public class SqlRepository implements Repository {
     private static final String SELECT_ALL_PURCHASES = "{ CALL selectAllPurchases }";
     private static final String SELECT_ALL_LOGIN_HISTORIES = "{ CALL selectAllLoginHistories }";
 
-    private static final String SELECT_FILTER_BALL_TYPES = "{ CALL filterBallTypes }";
+    private static final String SELECT_FILTER_BALL_TYPES = "{ CALL filterBallTypes (?) }";
 
     @Override
     public int createBall(Ball ball) throws Exception {
@@ -311,12 +311,14 @@ public class SqlRepository implements Repository {
     }
 
     @Override
-    public List<Ball> filterBallTypes() throws Exception {
+    public List<Ball> filterBallTypes(int id) throws Exception {
         List<Ball> filterBallTypes = new ArrayList<>();
         DataSource dataSource = SqlConnection.getInstance();
         try (Connection con = dataSource.getConnection();
-                CallableStatement stmt = con.prepareCall(SELECT_FILTER_BALL_TYPES);
-                ResultSet rs = stmt.executeQuery()) {
+                CallableStatement stmt = con.prepareCall(SELECT_FILTER_BALL_TYPES)) {
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 filterBallTypes.add(new Ball(
                         rs.getInt(BALL_ID),
@@ -327,8 +329,7 @@ public class SqlRepository implements Repository {
                         rs.getInt(ID_BALL_TYPE_FK)
                 ));
             }
+            return filterBallTypes;
         }
-        return filterBallTypes;
     }
-
 }

@@ -4,9 +4,17 @@
         <servlet-name>BuyBallsServlet</servlet-name>
         <servlet-class>Servlets.BuyBallsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BallCategoryServlet</servlet-name>
+        <servlet-class>Servlets.BallCategoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BuyBallsServlet</servlet-name>
         <url-pattern>/BuyBalls</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BallCategoryServlet</servlet-name>
+        <url-pattern>/BallCategory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

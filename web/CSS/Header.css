@@ -1,5 +1,4 @@
 html,body {
-    height:100%;
     width:100%;
 }
 body {
@@ -8,16 +7,28 @@ body {
 .navbar-collapse {
     text-align: right;
 }
-#BuyBallsHeader {
+header {
+    position: fixed;
+    top: 0;
     width:100%;
 }
 .navbar-dark .navbar-brand:hover{
     color: lightgrey;
 }
 .bg-dark {
-    opacity: 0.8;
+    opacity: 1;
     color: white!important;
 }
 .navbar-dark .navbar-nav .nav-link {
     color:white;
+}
+.nav-link:hover {
+    background-color:#212529;
+}
+#Cards {
+    width:100%;
+    padding: 1%;
+    margin-top: 4%;
+    position:absolute;
+    z-index: -1;
 }

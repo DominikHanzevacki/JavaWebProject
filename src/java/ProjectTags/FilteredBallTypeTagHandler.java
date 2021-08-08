@@ -1,0 +1,70 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ProjectTags;
+
+import Models.Ball;
+import SQL.SqlRepository;
+import Sessions.Session;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.SimpleTagSupport;
+
+/**
+ *
+ * @author Domi
+ */
+public class FilteredBallTypeTagHandler extends SimpleTagSupport {
+
+    private final SqlRepository sql = new SqlRepository();
+    private HttpSession session = this.session;
+
+    /**
+     * Called by the container to invoke this tag. The implementation of this
+     * method is provided by the tag library developer, and handles all tag
+     * processing, body iteration, etc.
+     */
+    @Override
+    public void doTag() throws JspException {
+        JspWriter out = getJspContext().getOut();
+        PageContext pageContext = (PageContext) getJspContext();
+        HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
+        int ballTypeId = Integer.valueOf(request.getSession().getAttribute(Session.BALL_TYPE_ID).toString());
+
+        try {
+            List<Ball> balls = sql.filterBallTypes(ballTypeId);
+            out.println("<div class=\"row row-cols-3\">");
+            balls.forEach((b) -> {
+                try {
+                    out.println("<div class=\"col\">");
+                    out.println("<div id=\"Card\" class=\"card border-light h-100 text-dark bg-dark\">");
+                    out.println("<div class=\"card-body\">");
+                    out.println("<h5 class=\"card-title\">" + b.getBallName() + "</h5>");
+                    out.println("<p class=\"card-text\">" + "Price: " + b.getBallPrice() + " kn" + "</p>");
+                    out.println("<p class=\"card-text\">" + "Left in stock: " + b.getBallsLeft() + "</p>");
+                    out.println("<p class=\"card-text\">" + "Description: " + "<br>"
+                            + b.getBallsDescription() + "</p>");
+                    out.println("<p><button type=\"button\" class=\"btn btn-secondary\">Add to cart</button></p>");
+                    out.println("</div>");
+                    out.println("</div>");
+                    out.println("</div>");
+                } catch (IOException ex) {
+                    Logger.getLogger(BuyBallsTagHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+        } catch (IOException ex) {
+            Logger.getLogger(BuyBallsTagHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(FilteredBallTypeTagHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+}

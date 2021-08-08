@@ -25,4 +25,14 @@
     <tag-class>ProjectTags.BuyBallsTagHandler</tag-class>
     <body-content>empty</body-content>
   </tag>
+  <tag>
+    <name>BallCategories</name>
+    <tag-class>ProjectTags.BallCategoriesTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <name>FilteredBallTypeTagHandler</name>
+    <tag-class>ProjectTags.FilteredBallTypeTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
 </taglib>

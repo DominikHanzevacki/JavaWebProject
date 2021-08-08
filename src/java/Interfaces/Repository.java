@@ -36,5 +36,5 @@ public interface Repository {
     List<Purchase> selectAllPurchases() throws Exception;
     List<LoginHistory> selectAllLoginHistories() throws Exception;
     
-    List<Ball> filterBallTypes() throws Exception;
+    List<Ball> filterBallTypes(int id) throws Exception;
 }
