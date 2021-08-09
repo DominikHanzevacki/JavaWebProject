@@ -35,4 +35,9 @@
     <tag-class>ProjectTags.FilteredBallTypeTagHandler</tag-class>
     <body-content>empty</body-content>
   </tag>
+  <tag>
+    <name>CartBalls</name>
+    <tag-class>ProjectTags.CartBallsTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
 </taglib>

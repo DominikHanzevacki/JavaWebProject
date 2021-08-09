@@ -17,6 +17,7 @@ public class Ball {
     private int BallsLeft;
     private String BallsDescription;
     private int IDBallType;
+    private int Ammount;
 
     public Ball(int BallID, String BallName, int BallPrice, int BallsLeft, String BallsDescription, int IDBallType) {
         this.BallID = BallID;
@@ -35,8 +36,26 @@ public class Ball {
         this.IDBallType = IDBallType;
     }
 
+    public Ball(int BallID, String BallName, int BallPrice, int BallsLeft, String BallsDescription, int IDBallType, int Ammount) {
+        this.BallID = BallID;
+        this.BallName = BallName;
+        this.BallPrice = BallPrice;
+        this.BallsLeft = BallsLeft;
+        this.BallsDescription = BallsDescription;
+        this.IDBallType = IDBallType;
+        this.Ammount = Ammount;
+    }
+
+    public void setBallID(int BallID) {
+        this.BallID = BallID;
+    }
+    
     public void setBallName(String BallName) {
         this.BallName = BallName;
+    }
+
+    public void setAmmount(int Ammount) {
+        this.Ammount = Ammount;
     }
 
     public void setBallPrice(int BallPrice) {
@@ -79,7 +98,22 @@ public class Ball {
         return IDBallType;
     }
 
+    public int getAmmount() {
+        return Ammount;
+    }
+
     public Ball() {
+    }
+
+    public static Ball parseStringToBall(String b) {
+        String[] stringArray = b.trim().split("!");
+        Ball ball = new Ball(Integer.valueOf(stringArray[0]),stringArray[1],Integer.valueOf(stringArray[2]),Integer.valueOf(stringArray[3]),stringArray[4],Integer.valueOf(stringArray[5]));
+        return ball;
+    }
+
+    @Override
+    public String toString() {
+        return this.getBallID() + "!" + this.getBallName() + "!" + this.getBallPrice() + "!" + this.getBallsLeft() + "!" + this.getBallsDescription() + "!" + this.getIDBallType();
     }
 
 }

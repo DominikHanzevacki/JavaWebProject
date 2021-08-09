@@ -38,15 +38,17 @@ public class BuyBallsTagHandler extends SimpleTagSupport {
                         if (bt.getBallTypeID() == b.getIDBallType()) {
                             try {
                                 out.println("<div class=\"col\">");
+                                out.println("<form method=\"POST\" action=\"Cart\">");
                                 out.println("<div id=\"Card\" class=\"card border-light h-100 text-dark bg-dark\">");
                                 out.println("<div class=\"card-body\">");
                                 out.println("<h5 class=\"card-title\">" + b.getBallName() + "</h5>");
-                                out.println("<p class=\"card-text\">" + "Price: " + b.getBallPrice() + " kn" + "</p>");
+                                out.println("<p class=\"card-text\">" + "Price: " +b.getBallPrice() + " kn" + "</p>");
                                 out.println("<p class=\"card-text\">" + "Left in stock: " + b.getBallsLeft() + "</p>");
                                 out.println("<p class=\"card-text\">" + "Description: " + "<br>"
                                         + b.getBallsDescription() + "</p>");
-                                out.println("<button type=\"button\" class=\"btn btn-secondary\">Add to cart</button></p>");
+                                out.println("<button name=\"MoveToCartBallID\" type=\"submit\" class=\"btn btn-secondary\" value=\""+b.getBallID()+"\">Add to cart</button>");
                                 out.println("</div>");
+                                 out.println("</form>");
                                 out.println("</div>");
                                 out.println("</div>");
                             } catch (IOException ex) {

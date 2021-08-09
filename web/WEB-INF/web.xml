@@ -8,6 +8,18 @@
         <servlet-name>BallCategoryServlet</servlet-name>
         <servlet-class>Servlets.BallCategoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>Servlets.CartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveBallFromCartServlet</servlet-name>
+        <servlet-class>Servlets.RemoveBallFromCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PurchaseBallsServlet</servlet-name>
+        <servlet-class>Servlets.PurchaseBallsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BuyBallsServlet</servlet-name>
         <url-pattern>/BuyBalls</url-pattern>
@@ -15,6 +27,18 @@
     <servlet-mapping>
         <servlet-name>BallCategoryServlet</servlet-name>
         <url-pattern>/BallCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/Cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveBallFromCartServlet</servlet-name>
+        <url-pattern>/RemoveBallFromCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PurchaseBallsServlet</servlet-name>
+        <url-pattern>/PurchaseBalls</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
