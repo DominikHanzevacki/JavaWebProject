@@ -7,7 +7,6 @@ package Servlets;
 
 import Models.Ball;
 import SQL.SqlRepository;
-import Sessions.Session;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -22,9 +21,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Domi
  */
-public class RemoveBallFromCartServlet extends HttpServlet {
+public class BallCRUDServlet extends HttpServlet {
 
     private final SqlRepository sql = new SqlRepository();
+    private int id;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +43,10 @@ public class RemoveBallFromCartServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RemoveBallFromCartServlet</title>");
+            out.println("<title>Servlet BallCRUDServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RemoveBallFromCartServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BallCRUDServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -78,22 +78,54 @@ public class RemoveBallFromCartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
+        String createButton = request.getParameter("CreateNewBall");
+        String UpdateButton = request.getParameter("UpdateBall");
+        String DeleteButton = request.getParameter("DeleteBall");
 
-            String removeBall = request.getParameter("RemoveFromCartID");
-            List<Ball> ballInCart = (List<Ball>) request.getSession().getAttribute(Session.ADDED_TO_CART_BALLS);
-            for (int i = 0; i < ballInCart.size(); i++) {
-                Ball b = ballInCart.get(i);
-                if (String.valueOf(b.getBallID()).equals(removeBall)) {
-                    ballInCart.remove(b);
-                    i--;
+        String ballName = request.getParameter("BallName");
+        String ballsPrice = request.getParameter("BallsPrice");
+        String ballsLeft = request.getParameter("BallsLeft");
+        String ballsDescription = request.getParameter("BallDescription");
+        String ballType = request.getParameter("BallType");
+
+        if (!ballName.isEmpty() && !ballsPrice.isEmpty() && !ballsLeft.isEmpty() && !ballsDescription.isEmpty() && !ballType.isEmpty()) {
+            try {
+                List<Ball> ballList = sql.selectAllBalls();
+                for (Ball b : ballList) {
+                    if (b.getBallName().equals(ballName)) {
+                        id = b.getBallID();
+                    }
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(BallCRUDServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (createButton != null) {
+
+                Ball ball = new Ball(ballName, Integer.parseInt(ballsPrice), Integer.parseInt(ballsLeft), ballsDescription, Integer.parseInt(ballType));
+                try {
+                    sql.createBall(ball);
+                } catch (Exception ex) {
+                    Logger.getLogger(BallCRUDServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (UpdateButton != null) {
+                try {
+
+                    Ball updatedBall = new Ball(ballName, Integer.parseInt(ballsPrice), Integer.parseInt(ballsLeft), ballsDescription, Integer.parseInt(ballType));
+                    sql.updateBall(id, updatedBall);
+                } catch (Exception ex) {
+                    Logger.getLogger(BallCRUDServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (DeleteButton != null) {
+                try {
+                    sql.deleteBall(id);
+                } catch (Exception ex) {
+                    Logger.getLogger(BallCRUDServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            request.getSession().setAttribute(Session.ADDED_TO_CART_BALLS, ballInCart);
-        } catch (Exception ex) {
-            Logger.getLogger(RemoveBallFromCartServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.sendRedirect("CartPage.jsp");
+
+        response.sendRedirect("Admin/AddNewBall.jsp");
+
     }
 
     /**

@@ -40,4 +40,14 @@
     <tag-class>ProjectTags.CartBallsTagHandler</tag-class>
     <body-content>empty</body-content>
   </tag>
+  <tag>
+    <name>LoginUser</name>
+    <tag-class>ProjectTags.LoginUserTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <name>AddNewBall</name>
+    <tag-class>ProjectTags.AddNewBallTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
 </taglib>

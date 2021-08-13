@@ -85,7 +85,7 @@ public class PurchaseBallsServlet extends HttpServlet {
         for (Ball bg : purchasedBalls) {
             //sql.createPurchases(bg);
         }
-        response.sendRedirect("CartPage.jsp");
+        response.sendRedirect("User/ProfilePage.jsp");
     }
 
     /**

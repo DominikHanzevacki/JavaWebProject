@@ -45,7 +45,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="LoginPage.jsp">
                                 <i class="fa fa-sign-in-alt" style="font-size:20px;"></i> Log in
                             </a>
                         </li>

@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="CSS/BuyBalls.css">
         <title>Your cart</title>
     </head>
-    <header>
+   <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/JavaWebProject">Home page</a>
@@ -31,7 +31,7 @@
                         </li>
                         <li class="nav-item dropdown">
                             <div class="sms-button" data-toggle="dropdown">
-                                <a class="nav-link dropdown-toggle" href="#"><i class="fa fa-list-ul" style="font-size:20px;"></i> Filter by category</a>
+                                <a class="nav-link dropdown-toggle" href="#" ><i class="fa fa-list-ul" style="font-size:20px;"></i> Filter by category</a>
                             </div>
                             <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
                                 <form method="POST" action="BallCategory">
@@ -45,7 +45,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="LoginPage.jsp">
                                 <i class="fa fa-sign-in-alt" style="font-size:20px;"></i> Log in
                             </a>
                         </li>
