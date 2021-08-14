@@ -24,8 +24,10 @@ public interface Repository {
     int createLoginHistory(LoginHistory loginHistory) throws Exception;
     
     void updateBall(int id , Ball ball) throws Exception;
+    void updateBallCategory(int id , BallType ballType) throws Exception;
     
     void deleteBall(int id ) throws Exception;
+    void deleteBallCategory(int id ) throws Exception;
     void deleteUser(int id ) throws Exception;
     void deletePurchases(int id ) throws Exception;
     void deleteLoginHistory(int id ) throws Exception;

@@ -14,4 +14,5 @@ public class Session {
      public static final String ADDED_TO_CART_BALLS = "addedToCartBalls";
      public static final String PURCHASED_BALLS = "purchasedBalls";
      public static final String LOGIN_USER = "loginUser";
+      public static final String FILTERED_LIST = "filteredList";
 }

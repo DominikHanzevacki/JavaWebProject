@@ -50,4 +50,19 @@
     <tag-class>ProjectTags.AddNewBallTagHandler</tag-class>
     <body-content>empty</body-content>
   </tag>
+  <tag>
+    <name>AddNewCategory</name>
+    <tag-class>ProjectTags.AddNewCategoryHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <name>ViewAllPurchases</name>
+    <tag-class>ProjectTags.ViewAllPurchasesTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <name>ViewAllLoginHistories</name>
+    <tag-class>ProjectTags.ViewAllLoginHistoriesTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
 </taglib>

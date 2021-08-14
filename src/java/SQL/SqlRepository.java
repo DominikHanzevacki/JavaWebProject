@@ -58,8 +58,10 @@ public class SqlRepository implements Repository {
     private static final String CREATE_LOGIN_HISTORY = "{ CALL createLoginHistory (?,?,?,?) }";
 
     private static final String UPDATE_BALL = "{ CALL updateBall (?,?,?,?,?,?) }";
+    private static final String UPDATE_BALL_CATEGORY = "{ CALL updateBallCategory (?,?) }";
 
     private static final String DELETE_BALL = "{ CALL deleteBall (?) }";
+    private static final String DELETE_BALL_CATEGORY = "{ CALL deleteBallCategory (?) }";
     private static final String DELETE_USER = "{ CALL deleteUser (?) }";
     private static final String DELETE_PURCHASE = "{ CALL deletePurchases (?) }";
     private static final String DELETE_LOGIN_HISTORY = "{ CALL deleteLoginHistory (?) }";
@@ -169,12 +171,36 @@ public class SqlRepository implements Repository {
             stmt.executeUpdate();
         }
     }
+    
+    @Override
+    public void updateBallCategory(int id, BallType ballType) throws Exception {
+        DataSource dataSource = SqlConnection.getInstance();
+        try (Connection con = dataSource.getConnection();
+                CallableStatement stmt = con.prepareCall(UPDATE_BALL_CATEGORY)) {
+
+            stmt.setString(1, ballType.getTypeOfBall());
+            stmt.setInt(2, id);
+
+            stmt.executeUpdate();
+        }
+    }
 
     @Override
     public void deleteBall(int id) throws Exception {
         DataSource dataSource = SqlConnection.getInstance();
         try (Connection con = dataSource.getConnection();
                 CallableStatement stmt = con.prepareCall(DELETE_BALL)) {
+
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
+    }
+    
+     @Override
+    public void deleteBallCategory(int id) throws Exception {
+        DataSource dataSource = SqlConnection.getInstance();
+        try (Connection con = dataSource.getConnection();
+                CallableStatement stmt = con.prepareCall(DELETE_BALL_CATEGORY)) {
 
             stmt.setInt(1, id);
             stmt.executeUpdate();

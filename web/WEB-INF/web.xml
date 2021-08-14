@@ -28,6 +28,18 @@
         <servlet-name>BallCRUD</servlet-name>
         <servlet-class>Servlets.BallCRUDServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CategoryCRUD</servlet-name>
+        <servlet-class>Servlets.CategoryCRUDServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FilterByUserAndLoginTime</servlet-name>
+        <servlet-class>Servlets.FilterByUserAndLoginTimeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>Servlets.LoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BuyBallsServlet</servlet-name>
         <url-pattern>/BuyBalls</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>BallCRUD</servlet-name>
         <url-pattern>/BallCRUD</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoryCRUD</servlet-name>
+        <url-pattern>/CategoryCRUD</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterByUserAndLoginTime</servlet-name>
+        <url-pattern>/FilterByUserAndLoginTime</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

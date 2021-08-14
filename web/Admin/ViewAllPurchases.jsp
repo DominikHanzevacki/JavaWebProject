@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/AddNewTable.css" />
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/AddNewCategoryTable.css" />
         <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/Header.css" />
         <title>Add new ball</title>
     </head>
@@ -52,63 +52,8 @@
     <body>
         <div id="NewTable">
             <table class="table table-dark">
-                <tag:AddNewBall/>
+                <tag:ViewAllPurchases/>
             </table>
-        </div>
-        <div id="buttonsAndInputs">
-            <form action="../BallCRUD" method="POST">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <b><p>Ball Name:</p></b>
-                        </div>
-                        <div class="col">
-                            <b> <p>Balls price:</p></b>
-                        </div>
-                        <div class="col">
-                            <b> <p>Balls left:</p></b>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" id="BallName" class="fadeIn second" name="BallName" placeholder="Ball name">
-                        </div>
-                        <div class="col">
-                            <input type="number" id="BallsPrice" class="fadeIn second" name="BallsPrice" placeholder="Balls price">
-                        </div>
-                        <div class="col">
-                            <input type="number" id="BallsLeft" class="fadeIn second" name="BallsLeft" placeholder="Balls lef">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <b><p>Ball description:</p></b>
-                        </div>
-                        <div class="col">
-                            <b> <p>Ball type:</p></b>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" id="BallDescription" class="fadeIn second" name="BallDescription" placeholder="Ball description">
-                        </div>
-                        <div class="col">
-                            <input type="number" id="BallType" class="fadeIn second" name="BallType" placeholder="Ball type">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <button name="CreateNewBall" type="submit" class="btn btn-secondary" value="create">Create new ball</button>
-                        </div>
-                        <div class="col">
-                            <button name="UpdateBall" type="submit" class="btn btn-secondary" value="update">Update ball</button>
-                        </div>
-                        <div class="col">
-                            <button name="DeleteBall" type="submit" class="btn btn-secondary" value="delete">Delete ball</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
         </div>
         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>       
