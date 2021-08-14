@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+  <tlib-version>1.0</tlib-version>
+  <short-name>javawebtag_library</short-name>
+  <uri>/WEB-INF/tlds/JavaWebtag_library</uri>
+  <!-- A validator verifies that the tags are used correctly at JSP
+          translation time. Validator entries look like this: 
+       <validator>
+           <validator-class>com.mycompany.TagLibValidator</validator-class>
+           <init-param>
+              <param-name>parameter</param-name>
+              <param-value>value</param-value>
+           </init-param>
+       </validator>
+    -->
+  <!-- A tag library can register Servlet Context event listeners in
+         case it needs to react to such events. Listener entries look
+         like this: 
+      <listener>
+          <listener-class>com.mycompany.TagLibListener</listener-class> 
+      </listener>
+    -->
+  <tag>
+    <name>BuyBalls</name>
+    <tag-class>ProjectTags.BuyBallsTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <name>BallCategories</name>
+    <tag-class>ProjectTags.BallCategoriesTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <name>FilteredBallTypeTagHandler</name>
+    <tag-class>ProjectTags.FilteredBallTypeTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <name>CartBalls</name>
+    <tag-class>ProjectTags.CartBallsTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <name>LoginUser</name>
+    <tag-class>ProjectTags.LoginUserTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <name>AddNewBall</name>
+    <tag-class>ProjectTags.AddNewBallTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <name>AddNewCategory</name>
+    <tag-class>ProjectTags.AddNewCategoryHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <name>ViewAllPurchases</name>
+    <tag-class>ProjectTags.ViewAllPurchasesTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <name>ViewAllLoginHistories</name>
+    <tag-class>ProjectTags.ViewAllLoginHistoriesTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+</taglib>
