@@ -1,0 +1,30 @@
+html,body {
+    background-color: black;
+}
+
+body {
+    height: 100vh;
+}
+
+#PayPalContainer {
+    text-align: center;
+    background-color: whitesmoke;
+    height:60%;
+    width: 60%;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+    border-radius: 25px;
+    padding: 1%;
+}
+#CashMethodButton{
+    color:white;
+    height: 15%;
+    width: 84%;
+    margin: 1%;
+    margin-top: 7%;
+    font-size: 1.5rem;
+}
