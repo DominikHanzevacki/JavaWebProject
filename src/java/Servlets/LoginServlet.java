@@ -5,18 +5,30 @@
  */
 package Servlets;
 
+import Models.LoginHistory;
+import Models.User;
+import SQL.SqlRepository;
+import Sessions.Session;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Domi
  */
 public class LoginServlet extends HttpServlet {
+
+    private final SqlRepository sql = new SqlRepository();
+    private String goToSite = "";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +47,7 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
+            out.println("<title>Servlet LoginServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
@@ -56,7 +68,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("Admin/AdminMainPage.jsp");
+        response.sendRedirect("LoginPage.jsp");
     }
 
     /**
@@ -70,7 +82,57 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            String username = request.getParameter("Username");
+            String password = request.getParameter("Password");
+
+            HttpSession session = request.getSession();
+            List<User> userList = sql.selectAllUsers();
+
+            Boolean validUser = false;
+            Boolean IsAdmin = false;
+
+            if (userList != null && userList.isEmpty() == false) {
+                for (User user : userList) {
+                    if (user.getUsername().equals(username)
+                            && user.getPass().equals(password)) {
+                        LoginHistory newLoginHistory = new LoginHistory(user.getUsersID(),LocalDate.now().toString(),"test123");
+                        sql.createLoginHistory(newLoginHistory);
+                        if (user.getUserType().equals("Admin")) {
+                            IsAdmin = true;
+                            break;
+                        }
+                        session.setAttribute(Session.LOGIN_USERNAME, user.getUsername());
+                        System.out.println(user.getUsername());
+                        validUser = true;
+                        break;
+                    }
+                }
+            }
+            if (session.getAttribute(Session.SITE) != null) {
+                goToSite = session.getAttribute(Session.SITE).toString();
+            }
+
+            if (validUser && goToSite.equals("ProfilePage")) {
+                session.setAttribute("LoginUsername", username);
+                session.setAttribute(Session.SITE, "");
+                response.sendRedirect("User/ProfilePage.jsp");
+            } else if (validUser && goToSite.equals("PurchaseMethod")) {
+                session.setAttribute("LoginUsername", username);
+                session.setAttribute(Session.SITE, "");
+                response.sendRedirect("User/PurchaseMethod.jsp");
+            } else if (validUser) {
+                session.setAttribute("LoginUsername", username);
+                session.setAttribute(Session.SITE, "");
+                response.sendRedirect("MainPage.jsp");
+            } else if (IsAdmin) {
+                response.sendRedirect("Admin/AdminMainPage.jsp");
+            } else {
+                response.sendRedirect("LoginPage.jsp");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

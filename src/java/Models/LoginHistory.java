@@ -5,11 +5,13 @@
  */
 package Models;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Domi
  */
-public class LoginHistory {
+public class LoginHistory implements Serializable{
 
     private int LoginHistoryID;
     private int IDUser;

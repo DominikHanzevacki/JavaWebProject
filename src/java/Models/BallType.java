@@ -5,11 +5,13 @@
  */
 package Models;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Domi
  */
-public class BallType {
+public class BallType implements Serializable{
     private int BallTypeID;
     private String TypeOfBall;
 

@@ -7,6 +7,7 @@ package Servlets;
 
 import Models.Ball;
 import SQL.SqlRepository;
+import Sessions.Session;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -77,15 +79,14 @@ public class PurchaseBallsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String balls = request.getParameter("Purchase");
-        String[] ballString = balls.substring(1, balls.length() - 1).trim().split(",");
-        List<Ball> purchasedBalls = new ArrayList();
-        for (String b : ballString) {
-            purchasedBalls.add(Ball.parseStringToBall(b));
+        request.getSession().setAttribute(Session.PURCHASED_BALLS, balls);
+        HttpSession session = request.getSession();
+        session.setAttribute(Session.SITE, "PurchaseMethod");
+        if (session.getAttribute(Session.LOGIN_USERNAME) != null) {
+            response.sendRedirect("User/PurchaseMethod.jsp");
+        } else {
+            response.sendRedirect("LoginPage.jsp");
         }
-        for (Ball bg : purchasedBalls) {
-            //sql.createPurchases(bg);
-        }
-        response.sendRedirect("User/ProfilePage.jsp");
     }
 
     /**

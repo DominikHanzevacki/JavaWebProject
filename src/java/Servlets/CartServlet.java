@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -83,9 +84,12 @@ public class CartServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             String chosenBall = request.getParameter("MoveToCartBallID");
+            String ammount = request.getParameter("Ammount");
+            
             List<Ball> allBalls = sql.selectAllBalls();
             selectedBalls = (List<Ball>) request.getSession().getAttribute(Session.ADDED_TO_CART_BALLS);
             allBalls.forEach(b -> {
+                b.setAmmount(Integer.valueOf(ammount));
                 if (String.valueOf(b.getBallID()).equals(chosenBall)) {
                     if (selectedBalls == null) {
                         selectedBalls = new ArrayList<>();

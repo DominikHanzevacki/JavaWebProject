@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class BallCRUDServlet extends HttpServlet {
 
     private final SqlRepository sql = new SqlRepository();
-    private int id;
+    private int id = 0;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -115,15 +115,18 @@ public class BallCRUDServlet extends HttpServlet {
                 } catch (Exception ex) {
                     Logger.getLogger(BallCRUDServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } else if (DeleteButton != null) {
+            }
+        }
+        if (id != 0) {
+            if (DeleteButton != null) {
                 try {
                     sql.deleteBall(id);
                 } catch (Exception ex) {
                     Logger.getLogger(BallCRUDServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }
 
+        }
         response.sendRedirect("Admin/AddNewBall.jsp");
 
     }

@@ -5,9 +5,15 @@
  */
 package Servlets;
 
+import Models.User;
+import SQL.SqlRepository;
 import Sessions.Session;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +23,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Domi
  */
-public class ProfilePageServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
+
+    private final SqlRepository sql = new SqlRepository();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +44,10 @@ public class ProfilePageServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProfilePageServlet</title>");
+            out.println("<title>Servlet RegisterServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProfilePageServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,12 +65,7 @@ public class ProfilePageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().setAttribute(Session.SITE, "ProfilePage");
-        if (request.getSession().getAttribute(Session.LOGIN_USERNAME) != null) {
-            response.sendRedirect("User/ProfilePage.jsp");
-        } else {
-            response.sendRedirect("LoginPage.jsp");
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -76,7 +79,31 @@ public class ProfilePageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String username = request.getParameter("Username");
+        String password = request.getParameter("Password");
+        String repeatedPassword = request.getParameter("RepeatedPassword");
+
+        if (password.equals(repeatedPassword)) {
+            try {
+                User newUser = new User(username, password, "User");
+                List<User> userList = (List<User>) request.getSession().getAttribute(
+                        Session.LOGIN_USER_LIST);
+                
+                if (userList == null) {
+                    userList = new ArrayList<>();
+                }
+                
+                userList.add(newUser);
+                sql.createUsers(newUser);
+                request.getSession().setAttribute(Session.LOGIN_USER_LIST,
+                        userList);
+                response.sendRedirect("LoginPage.jsp");
+            } catch (Exception ex) {
+                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            response.sendRedirect("Register.jsp");
+        }
     }
 
     /**

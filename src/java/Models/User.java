@@ -5,11 +5,13 @@
  */
 package Models;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Domi
  */
-public class User {
+public class User implements Serializable{
 
     private int UsersID;
     private String Username;
@@ -30,6 +32,11 @@ public class User {
         this.Username = Username;
         this.Pass = Pass;
         this.UserType = UserType;
+    }
+
+    public User(String Username, String Pass) {
+        this.Username = Username;
+        this.Pass = Pass;
     }
 
     public int getUsersID() {

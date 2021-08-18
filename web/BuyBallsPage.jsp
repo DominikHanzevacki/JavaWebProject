@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="CSS/BuyBalls.css">
         <title>Buy Balls</title>
     </head>
-    <header>
+     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/JavaWebProject">Home page</a>
@@ -40,12 +40,12 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a name="ProfilePageButton" class="nav-link" href="ProfilePage">
                                 <i class="fa fa-user" style="font-size:20px;"></i> View profile
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="LoginPage.jsp">
+                            <a class="nav-link" href="Login">
                                 <i class="fa fa-sign-in-alt" style="font-size:20px;"></i> Log in
                             </a>
                         </li>

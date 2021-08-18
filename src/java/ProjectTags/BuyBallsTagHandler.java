@@ -32,7 +32,7 @@ public class BuyBallsTagHandler extends SimpleTagSupport {
             List<BallType> balltypes = sql.selectAllBallTypes();
             balltypes.forEach((bt) -> {
                 try {
-                    out.println("<h5 class=\"card-title\">" + bt.getTypeOfBall() +":" + "</h5>");
+                    out.println("<h5 class=\"card-title\">" + bt.getTypeOfBall() + ":" + "</h5>");
                     out.println("<div class=\"row row-cols-3\">");
                     balls.forEach((b) -> {
                         if (bt.getBallTypeID() == b.getIDBallType()) {
@@ -42,13 +42,15 @@ public class BuyBallsTagHandler extends SimpleTagSupport {
                                 out.println("<div id=\"Card\" class=\"card border-light h-100 text-dark bg-dark\">");
                                 out.println("<div class=\"card-body\">");
                                 out.println("<h5 class=\"card-title\">" + b.getBallName() + "</h5>");
-                                out.println("<p class=\"card-text\">" + "Price: " +b.getBallPrice() + " kn" + "</p>");
+                                out.println("<p class=\"card-text\">" + "Price: " + b.getBallPrice() + " kn" + "</p>");
                                 out.println("<p class=\"card-text\">" + "Left in stock: " + b.getBallsLeft() + "</p>");
                                 out.println("<p class=\"card-text\">" + "Description: " + "<br>"
                                         + b.getBallsDescription() + "</p>");
-                                out.println("<button name=\"MoveToCartBallID\" type=\"submit\" class=\"btn btn-secondary\" value=\""+b.getBallID()+"\">Add to cart</button>");
+                                out.println("<input name=\"Ammount\" class=\"bg-dark\" min=\"1\" value=\"1\" type=\"number\"/>");
+                                out.println("<br>");
+                                out.println("<button id=\"MoveToCartBallID\" name=\"MoveToCartBallID\" type=\"submit\" class=\"btn btn-secondary\" value=\"" + b.getBallID() + "\">Add to cart</button>");
                                 out.println("</div>");
-                                 out.println("</form>");
+                                out.println("</form>");
                                 out.println("</div>");
                                 out.println("</div>");
                             } catch (IOException ex) {

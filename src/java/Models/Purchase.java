@@ -5,11 +5,13 @@
  */
 package Models;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Domi
  */
-public class Purchase {
+public class Purchase implements Serializable{
 
     private int PurchasesID;
     private int IDUser;

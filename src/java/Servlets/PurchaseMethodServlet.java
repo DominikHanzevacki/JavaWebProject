@@ -5,9 +5,18 @@
  */
 package Servlets;
 
+import Models.Ball;
+import Models.Purchase;
+import Models.User;
+import SQL.SqlRepository;
 import Sessions.Session;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +26,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Domi
  */
-public class ProfilePageServlet extends HttpServlet {
+public class PurchaseMethodServlet extends HttpServlet {
+
+    private final SqlRepository sql = new SqlRepository();
+    private int userId = 0;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +48,10 @@ public class ProfilePageServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProfilePageServlet</title>");
+            out.println("<title>Servlet PurchaseMethodServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProfilePageServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PurchaseMethodServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,12 +69,7 @@ public class ProfilePageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().setAttribute(Session.SITE, "ProfilePage");
-        if (request.getSession().getAttribute(Session.LOGIN_USERNAME) != null) {
-            response.sendRedirect("User/ProfilePage.jsp");
-        } else {
-            response.sendRedirect("LoginPage.jsp");
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -76,7 +83,37 @@ public class ProfilePageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            String cashMethodButton = request.getParameter("CashMethodButton");
+            List<Ball> balls = (List<Ball>)request.getSession().getAttribute(Session.ADDED_TO_CART_BALLS);
+            String username = request.getSession().getAttribute(Session.LOGIN_USERNAME).toString();
+
+            List<Ball> purchasedBalls = new ArrayList();
+            List<User> allUsers = sql.selectAllUsers();
+            for (Ball b : balls) {
+                purchasedBalls.add(b);
+            }
+            for (User user : allUsers) {
+                if (user.getUsername().equals(username)) {
+                    userId = user.getUsersID();
+                }
+            }
+            if (cashMethodButton != null) {
+                for (Ball bg : purchasedBalls) {
+                    Purchase newPurchase = new Purchase(userId, bg.getBallName(), LocalDate.now().toString(), "Cash");
+                    sql.createPurchases(newPurchase);
+                }
+
+            } else {
+                for (Ball bg : purchasedBalls) {
+                    Purchase newPurchase = new Purchase(userId, bg.getBallName(), LocalDate.now().toString(), "PayPal");
+                    sql.createPurchases(newPurchase);
+                }
+            }
+            response.sendRedirect("/JavaWebProject");
+        } catch (Exception ex) {
+            Logger.getLogger(PurchaseMethodServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

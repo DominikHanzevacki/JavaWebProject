@@ -40,7 +40,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a name="ProfilePageButton" class="nav-link" href="ProfilePage">
                                 <i class="fa fa-user" style="font-size:20px;"></i> View profile
                             </a>
                         </li>

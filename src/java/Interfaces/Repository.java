@@ -39,4 +39,5 @@ public interface Repository {
     List<LoginHistory> selectAllLoginHistories() throws Exception;
     
     List<Ball> filterBallTypes(int id) throws Exception;
+    User authenticateUser(String username, String password) throws Exception;
 }

@@ -21,10 +21,6 @@
         <servlet-class>Servlets.PurchaseBallsServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProfilePageServlet</servlet-name>
-        <servlet-class>Servlets.ProfilePageServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>BallCRUD</servlet-name>
         <servlet-class>Servlets.BallCRUDServlet</servlet-class>
     </servlet>
@@ -39,6 +35,22 @@
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>Servlets.LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PrintPurchasesServlet</servlet-name>
+        <servlet-class>Servlets.PrintPurchasesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfilePageServlet</servlet-name>
+        <servlet-class>Servlets.ProfilePageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PurchaseMethodServlet</servlet-name>
+        <servlet-class>Servlets.PurchaseMethodServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>Servlets.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BuyBallsServlet</servlet-name>
@@ -61,10 +73,6 @@
         <url-pattern>/PurchaseBalls</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProfilePageServlet</servlet-name>
-        <url-pattern>/ProfilePageServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>BallCRUD</servlet-name>
         <url-pattern>/BallCRUD</url-pattern>
     </servlet-mapping>
@@ -80,6 +88,22 @@
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PrintPurchasesServlet</servlet-name>
+        <url-pattern>/PrintPurchases</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfilePageServlet</servlet-name>
+        <url-pattern>/ProfilePage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PurchaseMethodServlet</servlet-name>
+        <url-pattern>/PurchaseMethod</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -88,19 +112,6 @@
     <welcome-file-list>
         <welcome-file>MainPage.jsp</welcome-file>
     </welcome-file-list>
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Security Application - users</web-resource-name>
-            <url-pattern>/User/*</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-        </web-resource-collection>
-        <auth-constraint>
-            <description>Za administratore i korisnike</description>
-            <role-name>admin</role-name>
-            <role-name>user</role-name>
-        </auth-constraint>
-    </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
         <form-login-config>

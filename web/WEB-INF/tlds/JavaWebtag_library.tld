@@ -41,11 +41,6 @@
     <body-content>empty</body-content>
   </tag>
   <tag>
-    <name>LoginUser</name>
-    <tag-class>ProjectTags.LoginUserTagHandler</tag-class>
-    <body-content>empty</body-content>
-  </tag>
-  <tag>
     <name>AddNewBall</name>
     <tag-class>ProjectTags.AddNewBallTagHandler</tag-class>
     <body-content>empty</body-content>
@@ -63,6 +58,11 @@
   <tag>
     <name>ViewAllLoginHistories</name>
     <tag-class>ProjectTags.ViewAllLoginHistoriesTagHandler</tag-class>
+    <body-content>empty</body-content>
+  </tag>
+  <tag>
+    <name>ProfileTag</name>
+    <tag-class>ProjectTags.ProfileTagHandler</tag-class>
     <body-content>empty</body-content>
   </tag>
 </taglib>

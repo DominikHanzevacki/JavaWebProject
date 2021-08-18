@@ -1,0 +1,31 @@
+#NewTable {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:30%;
+    margin:auto; 
+    width: 80%;
+    height:40%;
+    overflow: auto; 
+}
+th {
+    position: sticky;
+    top: 0;
+}
+
+#buttonsAndInputs {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+}
+p {
+    color:white;
+}
+input {
+    margin-bottom: 5%;
+}
+button {
+    margin-bottom: 5%;
+}

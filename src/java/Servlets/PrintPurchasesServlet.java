@@ -5,9 +5,12 @@
  */
 package Servlets;
 
+import Models.Ball;
 import Sessions.Session;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Domi
  */
-public class ProfilePageServlet extends HttpServlet {
+public class PrintPurchasesServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +39,10 @@ public class ProfilePageServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProfilePageServlet</title>");
+            out.println("<title>Servlet PrintPurchasesServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProfilePageServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PrintPurchasesServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,12 +60,7 @@ public class ProfilePageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().setAttribute(Session.SITE, "ProfilePage");
-        if (request.getSession().getAttribute(Session.LOGIN_USERNAME) != null) {
-            response.sendRedirect("User/ProfilePage.jsp");
-        } else {
-            response.sendRedirect("LoginPage.jsp");
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -76,7 +74,9 @@ public class ProfilePageServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String balls = request.getSession().getAttribute("Purchase").toString();
+        request.getSession().setAttribute(Session.ADDED_TO_CART_BALLS, balls);
+        response.sendRedirect("/JavaWebProject");
     }
 
     /**

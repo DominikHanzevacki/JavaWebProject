@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.management.Query.value;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.JspException;
@@ -23,6 +24,8 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  * @author Domi
  */
 public class CartBallsTagHandler extends SimpleTagSupport {
+
+    private double sumOfPrices = 0;
 
     /**
      * Called by the container to invoke this tag. The implementation of this
@@ -48,15 +51,13 @@ public class CartBallsTagHandler extends SimpleTagSupport {
                         out.println("<p class=\"card-text\">" + "Left in stock: " + b.getBallsLeft() + "</p>");
                         out.println("<p class=\"card-text\">" + "Description: " + "<br>"
                                 + b.getBallsDescription() + "</p>");
-                        out.println("<input name=\"Ammount\" class=\"bg-dark\" min=\"1\" value=\"1\" type=\"number\"/>");
-                        out.println("<br>");
-                        out.println("<br>");
                         out.println("<form method=\"POST\" action=\"RemoveBallFromCart\">");
-                        out.println("<button name=\"RemoveFromCartID\" type=\"submit\" class=\"btn btn-danger\" value=\"" + b.getBallID() + "\">Remove from cart</button>");
+                        out.println("<button id=\"RemoveFromCartID\" name=\"RemoveFromCartID\" type=\"submit\" class=\"btn btn-danger\" value=\"" + b.getBallID() + "\">Remove from cart</button>");
                         out.println("</form>");
                         out.println("</div>");
                         out.println("</div>");
                         out.println("</div>");
+                        sumOfPrices += b.getBallPrice() * b.getAmmount();
                     } catch (IOException ex) {
                         Logger.getLogger(BuyBallsTagHandler.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -66,6 +67,8 @@ public class CartBallsTagHandler extends SimpleTagSupport {
                 out.println("<button name=\"Purchase\" type=\"submit\" class=\"btn btn-success pull-right\" value=\"" + balls + "\">Purchase</button>");
                 out.println("</div>");
                 out.println("</form>");
+                sumOfPrices /= 6.36;
+                request.getSession().setAttribute(Session.SUM_OF_PRICES, sumOfPrices);
             }
         } catch (Exception ex) {
             Logger.getLogger(BuyBallsTagHandler.class.getName()).log(Level.SEVERE, null, ex);

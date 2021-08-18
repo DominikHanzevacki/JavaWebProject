@@ -73,6 +73,7 @@ public class SqlRepository implements Repository {
     private static final String SELECT_ALL_LOGIN_HISTORIES = "{ CALL selectAllLoginHistories }";
 
     private static final String SELECT_FILTER_BALL_TYPES = "{ CALL filterBallTypes (?) }";
+    private static final String AUTHENTICATE_USER = "{ CALL authenticateUser (?,?) }";
 
     @Override
     public int createBall(Ball ball) throws Exception {
@@ -171,7 +172,7 @@ public class SqlRepository implements Repository {
             stmt.executeUpdate();
         }
     }
-    
+
     @Override
     public void updateBallCategory(int id, BallType ballType) throws Exception {
         DataSource dataSource = SqlConnection.getInstance();
@@ -195,8 +196,8 @@ public class SqlRepository implements Repository {
             stmt.executeUpdate();
         }
     }
-    
-     @Override
+
+    @Override
     public void deleteBallCategory(int id) throws Exception {
         DataSource dataSource = SqlConnection.getInstance();
         try (Connection con = dataSource.getConnection();
@@ -357,5 +358,21 @@ public class SqlRepository implements Repository {
             }
             return filterBallTypes;
         }
+    }
+
+    @Override
+    public User authenticateUser(String username, String password) throws Exception {
+        User loginUser = new User(username, password);
+        DataSource dataSource = SqlConnection.getInstance();
+        try (Connection con = dataSource.getConnection();
+                CallableStatement stmt = con.prepareCall(AUTHENTICATE_USER)) {
+
+            stmt.setString(1, loginUser.getUsername());
+            stmt.setString(2, loginUser.getPass());
+            ResultSet rs = stmt.executeQuery();
+            loginUser = new User (rs.getString(USERNAME),rs.getString(PASSWORD),rs.getString(USER_TYPE));
+            return loginUser;
+        }
+
     }
 }

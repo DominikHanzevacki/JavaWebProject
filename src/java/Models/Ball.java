@@ -5,11 +5,13 @@
  */
 package Models;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Domi
  */
-public class Ball {
+public class Ball implements Serializable {
 
     private int BallID;
     private String BallName;
@@ -103,17 +105,6 @@ public class Ball {
     }
 
     public Ball() {
-    }
-
-    public static Ball parseStringToBall(String b) {
-        String[] stringArray = b.trim().split("!");
-        Ball ball = new Ball(Integer.valueOf(stringArray[0]),stringArray[1],Integer.valueOf(stringArray[2]),Integer.valueOf(stringArray[3]),stringArray[4],Integer.valueOf(stringArray[5]));
-        return ball;
-    }
-
-    @Override
-    public String toString() {
-        return this.getBallID() + "!" + this.getBallName() + "!" + this.getBallPrice() + "!" + this.getBallsLeft() + "!" + this.getBallsDescription() + "!" + this.getIDBallType();
     }
 
 }
