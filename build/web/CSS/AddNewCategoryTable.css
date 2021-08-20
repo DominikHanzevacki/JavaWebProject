@@ -1,12 +1,12 @@
 #NewTable {
     position:absolute;
-    top:0;
+    top:20%;
     left:0;
     right:0;
-    bottom:30%;
+    bottom:0;
     margin:auto; 
     width: 80%;
-    height: 40%;
+    height:40%;
     overflow: auto; 
 }
 th {
@@ -15,11 +15,12 @@ th {
 }
 
 #buttonsAndInputs {
-    width: 100%;
+    width: 25%;
+    margin-bottom: 35%;
     position: absolute;
+    margin-left: 9%;
     bottom: 0px;
-    margin-bottom: 5%;
-    text-align: center;
+    text-align: left;
 }
 p {
     color:white;
@@ -29,4 +30,12 @@ input {
 }
 button {
     margin-bottom: 5%;
+}
+#crudButtons  {
+    overflow-x: hidden;
+    width: 100%;
+    position: absolute;
+    right:0;
+    bottom:0;
+    text-align: center;
 }

@@ -7,7 +7,7 @@ package Servlets;
 
 import Models.Ball;
 import SQL.SqlRepository;
-import Sessions.Session;
+import Constants.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -86,8 +86,9 @@ public class CartServlet extends HttpServlet {
             String chosenBall = request.getParameter("MoveToCartBallID");
             String ammount = request.getParameter("Ammount");
             
+            
             List<Ball> allBalls = sql.selectAllBalls();
-            selectedBalls = (List<Ball>) request.getSession().getAttribute(Session.ADDED_TO_CART_BALLS);
+            selectedBalls = (List<Ball>) request.getSession().getAttribute(Constants.ADDED_TO_CART_BALLS);
             allBalls.forEach(b -> {
                 b.setAmmount(Integer.valueOf(ammount));
                 if (String.valueOf(b.getBallID()).equals(chosenBall)) {
@@ -102,15 +103,15 @@ public class CartServlet extends HttpServlet {
                         }
                         if (!duplicateID) {
                             selectedBalls.add(b);
-                            request.getSession().setAttribute(Session.ADDED_TO_CART_BALLS, selectedBalls);
+                            request.getSession().setAttribute(Constants.ADDED_TO_CART_BALLS, selectedBalls);
                         }
                     } else {
                         selectedBalls.add(b);
-                        request.getSession().setAttribute(Session.ADDED_TO_CART_BALLS, selectedBalls);
+                        request.getSession().setAttribute(Constants.ADDED_TO_CART_BALLS, selectedBalls);
                     }
                 }
             });
-            if (request.getSession().getAttribute(Session.ADDED_TO_CART_BALLS) != null) {
+            if (request.getSession().getAttribute(Constants.ADDED_TO_CART_BALLS) != null) {
                 response.sendRedirect("CartPage.jsp");
             }
             duplicateID = false;

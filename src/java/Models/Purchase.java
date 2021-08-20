@@ -15,14 +15,14 @@ public class Purchase implements Serializable{
 
     private int PurchasesID;
     private int IDUser;
-    private String BallPurchased;
+    private int BallPurchased;
     private String PurchasedDate;
     private String PurchasedMethod;
 
     public Purchase() {
     }
 
-    public Purchase(int PurchasesID, int IDUser, String BallPurchased, String PurchasedDate, String PurchasedMethod) {
+    public Purchase(int PurchasesID, int IDUser, int BallPurchased, String PurchasedDate, String PurchasedMethod) {
         this.PurchasesID = PurchasesID;
         this.IDUser = IDUser;
         this.BallPurchased = BallPurchased;
@@ -30,7 +30,7 @@ public class Purchase implements Serializable{
         this.PurchasedMethod = PurchasedMethod;
     }
 
-    public Purchase(int IDUser, String BallPurchased, String PurchasedDate, String PurchasedMethod) {
+    public Purchase(int IDUser, int BallPurchased, String PurchasedDate, String PurchasedMethod) {
         this.IDUser = IDUser;
         this.BallPurchased = BallPurchased;
         this.PurchasedDate = PurchasedDate;
@@ -45,7 +45,7 @@ public class Purchase implements Serializable{
         return IDUser;
     }
 
-    public String getBallPurchased() {
+    public int getBallPurchased() {
         return BallPurchased;
     }
 

@@ -7,7 +7,7 @@ package Servlets;
 
 import Models.Ball;
 import SQL.SqlRepository;
-import Sessions.Session;
+import Constants.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -81,7 +81,7 @@ public class RemoveBallFromCartServlet extends HttpServlet {
         try {
 
             String removeBall = request.getParameter("RemoveFromCartID");
-            List<Ball> ballInCart = (List<Ball>) request.getSession().getAttribute(Session.ADDED_TO_CART_BALLS);
+            List<Ball> ballInCart = (List<Ball>) request.getSession().getAttribute(Constants.ADDED_TO_CART_BALLS);
             for (int i = 0; i < ballInCart.size(); i++) {
                 Ball b = ballInCart.get(i);
                 if (String.valueOf(b.getBallID()).equals(removeBall)) {
@@ -89,7 +89,7 @@ public class RemoveBallFromCartServlet extends HttpServlet {
                     i--;
                 }
             }
-            request.getSession().setAttribute(Session.ADDED_TO_CART_BALLS, ballInCart);
+            request.getSession().setAttribute(Constants.ADDED_TO_CART_BALLS, ballInCart);
         } catch (Exception ex) {
             Logger.getLogger(RemoveBallFromCartServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

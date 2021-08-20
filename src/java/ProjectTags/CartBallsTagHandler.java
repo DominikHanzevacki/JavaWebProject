@@ -7,7 +7,7 @@ package ProjectTags;
 
 import Models.Ball;
 import Models.BallType;
-import Sessions.Session;
+import Constants.Constants;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,7 +25,6 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
  */
 public class CartBallsTagHandler extends SimpleTagSupport {
 
-    private double sumOfPrices = 0;
 
     /**
      * Called by the container to invoke this tag. The implementation of this
@@ -38,8 +37,9 @@ public class CartBallsTagHandler extends SimpleTagSupport {
         try {
             PageContext pageContext = (PageContext) getJspContext();
             HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
-            List<Ball> balls = (List<Ball>) request.getSession().getAttribute(Session.ADDED_TO_CART_BALLS);
+            List<Ball> balls = (List<Ball>) request.getSession().getAttribute(Constants.ADDED_TO_CART_BALLS);
             if (balls != null) {
+                out.println("<form method=\"POST\" action=\"PurchaseBalls\">");
                 out.println("<div class=\"row row-cols-3\">");
                 balls.forEach((b) -> {
                     try {
@@ -51,24 +51,20 @@ public class CartBallsTagHandler extends SimpleTagSupport {
                         out.println("<p class=\"card-text\">" + "Left in stock: " + b.getBallsLeft() + "</p>");
                         out.println("<p class=\"card-text\">" + "Description: " + "<br>"
                                 + b.getBallsDescription() + "</p>");
-                        out.println("<form method=\"POST\" action=\"RemoveBallFromCart\">");
+                        out.println("<input name=\"Ammount\" class=\"bg-dark\" min=\"1\" value=\"" + b.getAmmount() + "\" type=\"number\"/>");
+                        out.println("<br>");
                         out.println("<button id=\"RemoveFromCartID\" name=\"RemoveFromCartID\" type=\"submit\" class=\"btn btn-danger\" value=\"" + b.getBallID() + "\">Remove from cart</button>");
-                        out.println("</form>");
                         out.println("</div>");
                         out.println("</div>");
                         out.println("</div>");
-                        sumOfPrices += b.getBallPrice() * b.getAmmount();
                     } catch (IOException ex) {
                         Logger.getLogger(BuyBallsTagHandler.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 });
                 out.println("</div>");
-                out.println("<form method=\"POST\" action=\"PurchaseBalls\">");
                 out.println("<button name=\"Purchase\" type=\"submit\" class=\"btn btn-success pull-right\" value=\"" + balls + "\">Purchase</button>");
                 out.println("</div>");
                 out.println("</form>");
-                sumOfPrices /= 6.36;
-                request.getSession().setAttribute(Session.SUM_OF_PRICES, sumOfPrices);
             }
         } catch (Exception ex) {
             Logger.getLogger(BuyBallsTagHandler.class.getName()).log(Level.SEVERE, null, ex);

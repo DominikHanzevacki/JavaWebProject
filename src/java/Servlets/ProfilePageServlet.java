@@ -5,7 +5,7 @@
  */
 package Servlets;
 
-import Sessions.Session;
+import Constants.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -57,8 +57,8 @@ public class ProfilePageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().setAttribute(Session.SITE, "ProfilePage");
-        if (request.getSession().getAttribute(Session.LOGIN_USERNAME) != null) {
+        request.getSession().setAttribute(Constants.SITE, "ProfilePage");
+        if (request.getSession().getAttribute(Constants.LOGIN_USERNAME) != null) {
             response.sendRedirect("User/ProfilePage.jsp");
         } else {
             response.sendRedirect("LoginPage.jsp");

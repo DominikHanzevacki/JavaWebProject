@@ -7,7 +7,7 @@ package Servlets;
 
 import Models.User;
 import SQL.SqlRepository;
-import Sessions.Session;
+import Constants.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -86,8 +86,7 @@ public class RegisterServlet extends HttpServlet {
         if (password.equals(repeatedPassword)) {
             try {
                 User newUser = new User(username, password, "User");
-                List<User> userList = (List<User>) request.getSession().getAttribute(
-                        Session.LOGIN_USER_LIST);
+                List<User> userList = (List<User>) request.getSession().getAttribute(Constants.LOGIN_USER_LIST);
                 
                 if (userList == null) {
                     userList = new ArrayList<>();
@@ -95,7 +94,7 @@ public class RegisterServlet extends HttpServlet {
                 
                 userList.add(newUser);
                 sql.createUsers(newUser);
-                request.getSession().setAttribute(Session.LOGIN_USER_LIST,
+                request.getSession().setAttribute(Constants.LOGIN_USER_LIST,
                         userList);
                 response.sendRedirect("LoginPage.jsp");
             } catch (Exception ex) {

@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sessions;
+package Constants;
 
 /**
  *
  * @author Domi
  */
-public class Session {
+public class Constants {
 
     public static final String BALL_TYPE_ID = "ballTypeID";
     public static final String ADDED_TO_CART_BALLS = "addedToCartBalls";
@@ -20,4 +20,5 @@ public class Session {
     public static final String SUM_OF_PRICES = "sumOfPrices";
     public static final String SITE = "site";
     public static final String AMOUNT = "amount";
+    public static final String CLICKED_ROW_ID = "clickedRowId";
 }

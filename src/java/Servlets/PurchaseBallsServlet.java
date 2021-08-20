@@ -7,11 +7,13 @@ package Servlets;
 
 import Models.Ball;
 import SQL.SqlRepository;
-import Sessions.Session;
+import Constants.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,8 @@ import javax.servlet.http.HttpSession;
 public class PurchaseBallsServlet extends HttpServlet {
 
     private final SqlRepository sql = new SqlRepository();
+    private double sumOfPrices = 0;
+    private final double usdConvertRate = 6.36;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -79,14 +83,45 @@ public class PurchaseBallsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String balls = request.getParameter("Purchase");
-        request.getSession().setAttribute(Session.PURCHASED_BALLS, balls);
+        String purchaseButton = request.getParameter("Purchase");
+        String removeBall = request.getParameter("RemoveFromCartID");
+        String amount = request.getParameter("Ammount");
+
+        request.getSession().setAttribute(Constants.PURCHASED_BALLS, balls);
         HttpSession session = request.getSession();
-        session.setAttribute(Session.SITE, "PurchaseMethod");
-        if (session.getAttribute(Session.LOGIN_USERNAME) != null) {
-            response.sendRedirect("User/PurchaseMethod.jsp");
+        session.setAttribute(Constants.SITE, "PurchaseMethod");
+        request.getSession().setAttribute(Constants.SUM_OF_PRICES, sumOfPrices);
+
+        if (purchaseButton != null) {
+            List<Ball> ballInCart = (List<Ball>) request.getSession().getAttribute(Constants.ADDED_TO_CART_BALLS);
+            for (Ball b : ballInCart) {
+                b.setAmmount(Integer.valueOf(amount));
+                sumOfPrices += b.getBallPrice() * b.getAmmount();
+            }
+            sumOfPrices /= usdConvertRate;
+            request.getSession().setAttribute(Constants.SUM_OF_PRICES, sumOfPrices);
+            if (session.getAttribute(Constants.LOGIN_USERNAME) != null) {
+                response.sendRedirect("User/PurchaseMethod.jsp");
+            } else {
+                response.sendRedirect("LoginPage.jsp");
+            }
         } else {
-            response.sendRedirect("LoginPage.jsp");
+            try {
+                List<Ball> ballInCart = (List<Ball>) request.getSession().getAttribute(Constants.ADDED_TO_CART_BALLS);
+                for (int i = 0; i < ballInCart.size(); i++) {
+                    Ball b = ballInCart.get(i);
+                    if (String.valueOf(b.getBallID()).equals(removeBall)) {
+                        ballInCart.remove(b);
+                        i--;
+                    }
+                }
+                request.getSession().setAttribute(Constants.ADDED_TO_CART_BALLS, ballInCart);
+            } catch (Exception ex) {
+                Logger.getLogger(RemoveBallFromCartServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            response.sendRedirect("CartPage.jsp");
         }
+
     }
 
     /**

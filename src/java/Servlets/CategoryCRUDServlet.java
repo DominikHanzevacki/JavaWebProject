@@ -81,33 +81,35 @@ public class CategoryCRUDServlet extends HttpServlet {
         String UpdateButton = request.getParameter("UpdateBallCategory");
         String DeleteButton = request.getParameter("DeleteBallCategory");
 
-        String ballTypeID = request.getParameter("BallTypeID");
+        String tableRowID = request.getParameter("RowID");
         String typeOfBall = request.getParameter("TypeOfBall");
-
+        System.out.println(createButton);
+        System.out.println(UpdateButton);
+        System.out.println(DeleteButton);
         if (!typeOfBall.isEmpty()) {
             if (createButton != null) {
-
                 BallType ballType = new BallType(typeOfBall);
                 try {
                     sql.createBallType(ballType);
+                    System.out.println("tu sam");
                 } catch (Exception ex) {
                     Logger.getLogger(BallCRUDServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
-        if (!ballTypeID.isEmpty()) {
+        if (!tableRowID.isEmpty()) {
             if (UpdateButton != null) {
                 try {
 
                     BallType updatedBallType = new BallType(typeOfBall);
-                    sql.updateBallCategory(Integer.valueOf(ballTypeID), updatedBallType);
+                    sql.updateBallCategory(Integer.valueOf(tableRowID), updatedBallType);
                 } catch (Exception ex) {
                     Logger.getLogger(BallCRUDServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else if (DeleteButton != null) {
                 try {
-                    sql.deleteBallCategory(Integer.valueOf(ballTypeID));
-                    System.out.println(Integer.valueOf(ballTypeID));
+                    sql.deleteBallCategory(Integer.valueOf(tableRowID));
+                    System.out.println(Integer.valueOf(tableRowID));
                 } catch (Exception ex) {
                     Logger.getLogger(BallCRUDServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 public class BallCRUDServlet extends HttpServlet {
 
     private final SqlRepository sql = new SqlRepository();
-    private int id = 0;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -82,6 +81,7 @@ public class BallCRUDServlet extends HttpServlet {
         String UpdateButton = request.getParameter("UpdateBall");
         String DeleteButton = request.getParameter("DeleteBall");
 
+        String tableRowID = request.getParameter("RowID");
         String ballName = request.getParameter("BallName");
         String ballsPrice = request.getParameter("BallsPrice");
         String ballsLeft = request.getParameter("BallsLeft");
@@ -89,16 +89,6 @@ public class BallCRUDServlet extends HttpServlet {
         String ballType = request.getParameter("BallType");
 
         if (!ballName.isEmpty() && !ballsPrice.isEmpty() && !ballsLeft.isEmpty() && !ballsDescription.isEmpty() && !ballType.isEmpty()) {
-            try {
-                List<Ball> ballList = sql.selectAllBalls();
-                for (Ball b : ballList) {
-                    if (b.getBallName().equals(ballName)) {
-                        id = b.getBallID();
-                    }
-                }
-            } catch (Exception ex) {
-                Logger.getLogger(BallCRUDServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
             if (createButton != null) {
 
                 Ball ball = new Ball(ballName, Integer.parseInt(ballsPrice), Integer.parseInt(ballsLeft), ballsDescription, Integer.parseInt(ballType));
@@ -111,21 +101,17 @@ public class BallCRUDServlet extends HttpServlet {
                 try {
 
                     Ball updatedBall = new Ball(ballName, Integer.parseInt(ballsPrice), Integer.parseInt(ballsLeft), ballsDescription, Integer.parseInt(ballType));
-                    sql.updateBall(id, updatedBall);
+                    sql.updateBall(Integer.valueOf(tableRowID), updatedBall);
                 } catch (Exception ex) {
                     Logger.getLogger(BallCRUDServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
-        }
-        if (id != 0) {
-            if (DeleteButton != null) {
+            } else if (DeleteButton != null) {
                 try {
-                    sql.deleteBall(id);
+                    sql.deleteBall(Integer.valueOf(tableRowID));
                 } catch (Exception ex) {
                     Logger.getLogger(BallCRUDServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-
         }
         response.sendRedirect("Admin/AddNewBall.jsp");
 

@@ -3,18 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/src/java/Models/Ball.java</file>
-            <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/web/User/PurchaseMethod.jsp</file>
+            <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/src/java/ProjectTags/FilteredBallTypeTagHandler.java</file>
             <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/src/java/Servlets/PurchaseMethodServlet.java</file>
             <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/src/java/ProjectTags/CartBallsTagHandler.java</file>
-            <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/web/CartPage.jsp</file>
-            <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/src/java/Servlets/PurchaseBallsServlet.java</file>
-            <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/web/BuyBallsPage.jsp</file>
-            <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/web/LoginPage.jsp</file>
-            <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/web/MainPage.jsp</file>
+            <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/web/Register.jsp</file>
+            <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/src/java/ProjectTags/BallCategoriesTagHandler.java</file>
+            <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/src/java/Servlets/CartServlet.java</file>
             <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/src/java/ProjectTags/BuyBallsTagHandler.java</file>
-            <file>file:/C:/Users/Domi/Desktop/Faks_Predmeti/3.%20godina/Java%20Web%20Project/JavaWebProject/src/java/Servlets/LoginServlet.java</file>
         </group>
     </open-files>
 </project-private>

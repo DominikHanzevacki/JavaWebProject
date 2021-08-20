@@ -8,7 +8,7 @@ package ProjectTags;
 import Models.Purchase;
 import Models.User;
 import SQL.SqlRepository;
-import Sessions.Session;
+import Constants.Constants;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -34,11 +34,10 @@ public class ProfileTagHandler extends SimpleTagSupport {
             JspWriter out = getJspContext().getOut();
             PageContext pageContext = (PageContext) getJspContext();
             HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
-            String loginedUsername = request.getSession().getAttribute(Session.LOGIN_USERNAME).toString();
-            System.out.println(loginedUsername);
+            String loginedUsername = request.getSession().getAttribute(Constants.LOGIN_USERNAME).toString();
             List<Purchase> allPurchases = sql.selectAllPurchases();
             List<User> allUsers = sql.selectAllUsers();
-            for (User us: allUsers) {
+            for (User us : allUsers) {
                 if (loginedUsername.equals(us.getUsername())) {
                     id = us.getUsersID();
                 }
@@ -53,18 +52,18 @@ public class ProfileTagHandler extends SimpleTagSupport {
             out.println("</thead>");
             out.println("<tbody>");
             allPurchases.forEach((p) -> {
-                    if (p.getIDUser() == id) {
-                        try {
-                            out.println("<tr><td scope=\"row\">" + p.getPurchasesID() + "</td>");
-                            out.println("<td>" + p.getIDUser() + "</td>");
-                            out.println("<td>" + p.getBallPurchased() + "</td>");
-                            out.println("<td>" + p.getPurchasedDate() + "</td>");
-                            out.println("<td>" + p.getPurchasedMethod() + "</td>");
-                            out.println("</tr>");
-                        } catch (IOException ex) {
-                            Logger.getLogger(AddNewBallTagHandler.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                if (p.getIDUser() == id) {
+                    try {
+                        out.println("<tr><td scope=\"row\">" + p.getPurchasesID() + "</td>");
+                        out.println("<td>" + p.getIDUser() + "</td>");
+                        out.println("<td>" + p.getBallPurchased() + "</td>");
+                        out.println("<td>" + p.getPurchasedDate() + "</td>");
+                        out.println("<td>" + p.getPurchasedMethod() + "</td>");
+                        out.println("</tr>");
+                    } catch (IOException ex) {
+                        Logger.getLogger(AddNewBallTagHandler.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                }
             });
             out.println("</tbody>");
         } catch (Exception ex) {

@@ -18,8 +18,8 @@
             <h1>Register</h1>
             <form action="Register" method="POST">
                 <input type="text" id="Username" class="fadeIn second" name="Username" placeholder="Username">
-                <input type="text" id="Password" class="fadeIn third" name="Password" placeholder="Password">
-                <input type="text" id="RepeatedPassword" class="fadeIn third" name="RepeatedPassword" placeholder="Repeat Password">
+                <input type="password" id="Password" class="fadeIn third" name="Password" placeholder="Password">
+                <input type="password" id="RepeatedPassword" class="fadeIn third" name="RepeatedPassword" placeholder="Repeat Password">
                 <button id="registerButton" type="submit" class="btn btn-dark fadeIn fourth ">Register</button>
             </form>
             <div id="keepBrowsing">

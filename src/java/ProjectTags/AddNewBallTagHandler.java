@@ -24,6 +24,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 public class AddNewBallTagHandler extends SimpleTagSupport {
 
     private final SqlRepository sql = new SqlRepository();
+    private int counter = 0;
 
     /**
      * Called by the container to invoke this tag. The implementation of this
@@ -44,10 +45,11 @@ public class AddNewBallTagHandler extends SimpleTagSupport {
             out.println("<th scope=\"col\">Ball Type</th>");
             out.println("</tr>");
             out.println("</thead>");
-            out.println("<tbody>");
+            out.println("<tbody id=\"ballTable\">");
             allBalls.forEach((b) -> {
                 try {
-                    out.println("<tr><td scope=\"row\">" + b.getBallID() + "</td>");
+                    counter++;
+                    out.println("<tr id=\"ballName"+counter+"\" class=\"clickable-row\"><td scope=\"row\">" + b.getBallID() + "</td>");
                     out.println("<td>" + b.getBallName() + "</td>");
                     out.println("<td>" + b.getBallPrice() + "</td>");
                     out.println("<td>" + b.getBallsLeft() + "</td>");

@@ -8,7 +8,7 @@ package Servlets;
 import Models.Ball;
 import Models.BallType;
 import SQL.SqlRepository;
-import Sessions.Session;
+import Constants.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -84,10 +84,10 @@ public class BallCategoryServlet extends HttpServlet {
             List<BallType> ballTypes = sql.selectAllBallTypes();
             ballTypes.forEach(bt -> {
                 if (bt.getTypeOfBall().equals(ballTypeName)) {
-                    request.getSession().setAttribute(Session.BALL_TYPE_ID, bt.getBallTypeID());
+                    request.getSession().setAttribute(Constants.BALL_TYPE_ID, bt.getBallTypeID());
                 }
             });
-            if (request.getSession().getAttribute(Session.BALL_TYPE_ID) != null) {
+            if (request.getSession().getAttribute(Constants.BALL_TYPE_ID) != null) {
                 response.sendRedirect("BallCategories.jsp");
             }
         } catch (Exception ex) {

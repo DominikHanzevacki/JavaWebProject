@@ -6,7 +6,7 @@
 package Servlets;
 
 import Models.Ball;
-import Sessions.Session;
+import Constants.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -75,7 +75,7 @@ public class PrintPurchasesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String balls = request.getSession().getAttribute("Purchase").toString();
-        request.getSession().setAttribute(Session.ADDED_TO_CART_BALLS, balls);
+        request.getSession().setAttribute(Constants.ADDED_TO_CART_BALLS, balls);
         response.sendRedirect("/JavaWebProject");
     }
 

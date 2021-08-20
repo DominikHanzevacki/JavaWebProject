@@ -9,7 +9,7 @@ import Models.Ball;
 import Models.Purchase;
 import Models.User;
 import SQL.SqlRepository;
-import Sessions.Session;
+import Constants.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -69,24 +69,10 @@ public class PurchaseMethodServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
         try {
             String cashMethodButton = request.getParameter("CashMethodButton");
-            List<Ball> balls = (List<Ball>)request.getSession().getAttribute(Session.ADDED_TO_CART_BALLS);
-            String username = request.getSession().getAttribute(Session.LOGIN_USERNAME).toString();
+            List<Ball> balls = (List<Ball>) request.getSession().getAttribute(Constants.ADDED_TO_CART_BALLS);
+            String username = request.getSession().getAttribute(Constants.LOGIN_USERNAME).toString();
 
             List<Ball> purchasedBalls = new ArrayList();
             List<User> allUsers = sql.selectAllUsers();
@@ -100,20 +86,36 @@ public class PurchaseMethodServlet extends HttpServlet {
             }
             if (cashMethodButton != null) {
                 for (Ball bg : purchasedBalls) {
-                    Purchase newPurchase = new Purchase(userId, bg.getBallName(), LocalDate.now().toString(), "Cash");
+                    Purchase newPurchase = new Purchase(userId, Integer.valueOf(bg.getBallID()), LocalDate.now().toString(), "Cash");
                     sql.createPurchases(newPurchase);
                 }
 
             } else {
                 for (Ball bg : purchasedBalls) {
-                    Purchase newPurchase = new Purchase(userId, bg.getBallName(), LocalDate.now().toString(), "PayPal");
+                    Purchase newPurchase = new Purchase(userId, Integer.valueOf(bg.getBallID()), LocalDate.now().toString(), "PayPal");
                     sql.createPurchases(newPurchase);
                 }
             }
-            response.sendRedirect("/JavaWebProject");
+            System.out.println("PayPal");
+            response.sendRedirect("../JavaWebProject");
         } catch (Exception ex) {
             Logger.getLogger(PurchaseMethodServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+
     }
 
     /**

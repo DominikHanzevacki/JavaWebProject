@@ -130,7 +130,7 @@ public class SqlRepository implements Repository {
                 CallableStatement stmt = con.prepareCall(CREATE_PURCHASE)) {
 
             stmt.setInt(1, purchase.getIDUser());
-            stmt.setString(2, purchase.getBallPurchased());
+            stmt.setInt(2, purchase.getBallPurchased());
             stmt.setString(3, purchase.getPurchasedDate());
             stmt.setString(4, purchase.getPurchasedMethod());
             stmt.registerOutParameter(5, Types.INTEGER);
@@ -309,7 +309,7 @@ public class SqlRepository implements Repository {
                 purchases.add(new Purchase(
                         rs.getInt(PURCHASE_ID),
                         rs.getInt(ID_USER_FK_PURCHASES),
-                        rs.getString(BALL_PURCHASED),
+                        rs.getInt(BALL_PURCHASED),
                         rs.getString(PURCHASED_DATE),
                         rs.getString(PURCHASED_METHOD)
                 ));

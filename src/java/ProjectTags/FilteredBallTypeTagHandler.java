@@ -7,7 +7,7 @@ package ProjectTags;
 
 import Models.Ball;
 import SQL.SqlRepository;
-import Sessions.Session;
+import Constants.Constants;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,7 +38,7 @@ public class FilteredBallTypeTagHandler extends SimpleTagSupport {
         JspWriter out = getJspContext().getOut();
         PageContext pageContext = (PageContext) getJspContext();
         HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
-        int ballTypeId = Integer.valueOf(request.getSession().getAttribute(Session.BALL_TYPE_ID).toString());
+        int ballTypeId = Integer.valueOf(request.getSession().getAttribute(Constants.BALL_TYPE_ID).toString());
 
         try {
             List<Ball> balls = sql.filterBallTypes(ballTypeId);
@@ -54,6 +54,9 @@ public class FilteredBallTypeTagHandler extends SimpleTagSupport {
                     out.println("<p class=\"card-text\">" + "Left in stock: " + b.getBallsLeft() + "</p>");
                     out.println("<p class=\"card-text\">" + "Description: " + "<br>"
                             + b.getBallsDescription() + "</p>");
+                    out.println("<input name=\"Ammount\" class=\"bg-dark\" min=\"1\" value=\"1\" type=\"number\"/>");
+                    out.println("<br>");
+                    out.println("<br>");
                     out.println("<button name=\"MoveToCartBallID\" type=\"submit\" class=\"btn btn-secondary\" value=\"" + b.getBallID() + "\">Add to cart</button>");
                     out.println("</div>");
                     out.println("</form>");

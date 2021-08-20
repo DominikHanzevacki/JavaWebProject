@@ -50,46 +50,54 @@
         </nav>
     </header>
     <body>
+        <form action="../CategoryCRUD" method="POST">
+            <div id="buttonsAndInputs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <b><p>Type of ball:</p></b>
+                        </div>
+                        <div class="col">
+                            <input type="text" id="TypeOfBall" class="fadeIn second" name="TypeOfBall" placeholder="Type of ball">
+                            <input type="hidden" id="RowID" name="RowID">
+                        </div>   
+                    </div>
+                </div>
+            </div>
+            <div id="crudButtons">
+                <div class="row">
+                    <div class="col">
+                        <button name="CreateNewBallCategory" type="submit" class="btn btn-secondary" value="create">Create new ball</button>
+                    </div>
+                    <div class="col">
+                        <button name="UpdateBallCategory" type="submit" class="btn btn-secondary" value="update">Update ball</button>
+                    </div>
+                    <div class="col">
+                        <button name="DeleteBallCategory" type="submit" class="btn btn-secondary" value="delete">Delete ball</button>
+                    </div>
+                </div>
+            </div>
+        </form>
         <div id="NewTable">
             <table class="table table-dark">
                 <tag:AddNewCategory/>
             </table>
         </div>
-        <div id="buttonsAndInputs">
-            <form action="../CategoryCRUD" method="POST">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <b><p>ID:</p></b>
-                        </div>
-                        <div class="col">
-                            <b><p>Type of ball:</p></b>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" id="TypeOfBall" class="fadeIn second" name="BallTypeID" placeholder="Ball type id">
-                        </div>
-                        <div class="col">
-                            <input type="text" id="TypeOfBall" class="fadeIn second" name="TypeOfBall" placeholder="Type of ball">
-                        </div>                  
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <button name="CreateNewBallCategory" type="submit" class="btn btn-secondary" value="create">Create new ball</button>
-                        </div>
-                        <div class="col">
-                            <button name="UpdateBallCategory" type="submit" class="btn btn-secondary" value="update">Update ball</button>
-                        </div>
-                        <div class="col">
-                            <button name="DeleteBallCategory" type="submit" class="btn btn-secondary" value="delete">Delete ball</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>       
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script>
+            jQuery(document).ready(function ($) {
+                $(".clickable-row").click(function (e) {
+                    var tableRows = document.querySelectorAll('#ballTable tr');
+                    for (let i = 0; i < tableRows.length; i++) {
+                        if (e.currentTarget.id === tableRows[i].id) {
+                            document.getElementById("RowID").value = tableRows[i].getElementsByTagName("td")[0].innerText;
+                            document.getElementById("TypeOfBall").value = tableRows[i].getElementsByTagName("td")[1].innerText;
+                        }
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

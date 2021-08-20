@@ -8,7 +8,7 @@ package Servlets;
 import Models.LoginHistory;
 import Models.User;
 import SQL.SqlRepository;
-import Sessions.Session;
+import Constants.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -88,7 +88,7 @@ public class FilterByUserAndLoginTimeServlet extends HttpServlet {
             List<LoginHistory> filterList = new ArrayList();
             List<User> allUsers = sql.selectAllUsers();
             if (filterByUser.isEmpty() && filterByLoginTime.isEmpty()) {
-                request.getSession().setAttribute(Session.FILTERED_LIST, allLoginHistories);
+                request.getSession().setAttribute(Constants.FILTERED_LIST, allLoginHistories);
             }
             if (!filterByUser.isEmpty()) {
                 for (User u : allUsers) {
@@ -101,7 +101,7 @@ public class FilterByUserAndLoginTimeServlet extends HttpServlet {
                         filterList.add(l);
                     }
                 }
-                request.getSession().setAttribute(Session.FILTERED_LIST, filterList);
+                request.getSession().setAttribute(Constants.FILTERED_LIST, filterList);
             }
             if (!filterByLoginTime.isEmpty()) {
                 for (LoginHistory l : allLoginHistories) {
@@ -110,7 +110,7 @@ public class FilterByUserAndLoginTimeServlet extends HttpServlet {
                         System.out.println("Added");
                     }
                 }
-                request.getSession().setAttribute(Session.FILTERED_LIST, filterList);
+                request.getSession().setAttribute(Constants.FILTERED_LIST, filterList);
             }
             response.sendRedirect("Admin/ViewLoginHistories.jsp");
         } catch (Exception ex) {

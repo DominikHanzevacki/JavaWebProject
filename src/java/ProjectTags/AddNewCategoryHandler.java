@@ -22,6 +22,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 public class AddNewCategoryHandler extends SimpleTagSupport {
 
     private final SqlRepository sql = new SqlRepository();
+    private int counter = 0;
 
     /**
      * Called by the container to invoke this tag. The implementation of this
@@ -38,11 +39,12 @@ public class AddNewCategoryHandler extends SimpleTagSupport {
             out.println("<th scope=\"col\">Type of ball</th>");
             out.println("</tr>");
             out.println("</thead>");
-            out.println("<tbody>");
+            out.println("<tbody id=\"ballTable\">");
             allBalls.forEach((b) -> {
                 try {
-                    out.println("<tr><td scope=\"row\">" + b.getBallTypeID()+ "</td>");
-                    out.println("<td>" + b.getTypeOfBall()+ "</td>");
+                    counter++;
+                    out.println("<tr id=\"ballName"+counter+"\" class=\"clickable-row\"><td scope=\"row\">" + b.getBallTypeID() + "</td>");
+                    out.println("<td>" + b.getTypeOfBall() + "</td>");
                     out.println("</tr>");
                 } catch (IOException ex) {
                     Logger.getLogger(AddNewBallTagHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -53,5 +55,5 @@ public class AddNewCategoryHandler extends SimpleTagSupport {
             Logger.getLogger(BallCategoriesTagHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

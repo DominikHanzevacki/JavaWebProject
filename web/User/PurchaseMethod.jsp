@@ -10,7 +10,7 @@
         <title>Purchase Method</title>
     </head>
     <body>
-        <form action="../PurchaseMethod" method="POST">
+        <form action="../PurchaseMethod">
             <div id="PayPalContainer">
                 <h1>Choose purchase method: </h1>
                 <button id="CashMethodButton" name="CashMethodButton" type="submit" class="btn bg-dark"><i class="fas fa-coins"></i> Cash</button>
@@ -27,8 +27,18 @@
                                     }
                                 }]
                         });
+                    },
+                    onApprove: function (data, actions) {
+                        return actions.order.capture().then(function (details) {
+                            document.location.href = '../PurchaseMethod';
+                        });
+                    },
+
+                    style: {
+                        layout: 'horizontal'
                     }
                 }).render('#PayPalContainer');
+
 
             </script>
         </form>

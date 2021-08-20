@@ -8,9 +8,10 @@ package Servlets;
 import Models.LoginHistory;
 import Models.User;
 import SQL.SqlRepository;
-import Sessions.Session;
+import Constants.Constants;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.Inet4Address;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
@@ -96,34 +97,33 @@ public class LoginServlet extends HttpServlet {
                 for (User user : userList) {
                     if (user.getUsername().equals(username)
                             && user.getPass().equals(password)) {
-                        LoginHistory newLoginHistory = new LoginHistory(user.getUsersID(),LocalDate.now().toString(),"test123");
+                        LoginHistory newLoginHistory = new LoginHistory(user.getUsersID(),LocalDate.now().toString(),Inet4Address.getLocalHost().getHostAddress());
                         sql.createLoginHistory(newLoginHistory);
                         if (user.getUserType().equals("Admin")) {
                             IsAdmin = true;
                             break;
                         }
-                        session.setAttribute(Session.LOGIN_USERNAME, user.getUsername());
-                        System.out.println(user.getUsername());
+                        session.setAttribute(Constants.LOGIN_USERNAME, user.getUsername());
                         validUser = true;
                         break;
                     }
                 }
             }
-            if (session.getAttribute(Session.SITE) != null) {
-                goToSite = session.getAttribute(Session.SITE).toString();
+            if (session.getAttribute(Constants.SITE) != null) {
+                goToSite = session.getAttribute(Constants.SITE).toString();
             }
 
             if (validUser && goToSite.equals("ProfilePage")) {
                 session.setAttribute("LoginUsername", username);
-                session.setAttribute(Session.SITE, "");
+                session.setAttribute(Constants.SITE, "");
                 response.sendRedirect("User/ProfilePage.jsp");
             } else if (validUser && goToSite.equals("PurchaseMethod")) {
                 session.setAttribute("LoginUsername", username);
-                session.setAttribute(Session.SITE, "");
+                session.setAttribute(Constants.SITE, "");
                 response.sendRedirect("User/PurchaseMethod.jsp");
             } else if (validUser) {
                 session.setAttribute("LoginUsername", username);
-                session.setAttribute(Session.SITE, "");
+                session.setAttribute(Constants.SITE, "");
                 response.sendRedirect("MainPage.jsp");
             } else if (IsAdmin) {
                 response.sendRedirect("Admin/AdminMainPage.jsp");

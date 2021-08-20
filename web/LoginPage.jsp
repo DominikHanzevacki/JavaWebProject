@@ -12,7 +12,7 @@
             <h1>Login:</h1>
             <form action="Login" method="POST">
                 <input type="text" id="Username" class="fadeIn second" name="Username" placeholder="Username">
-                <input type="text" id="Password" class="fadeIn third" name="Password" placeholder="Password">
+                <input type="password" id="Password" class="fadeIn third" name="Password" placeholder="Password">
                 <button id="loginButton" type="submit" class="btn btn-dark fadeIn fourth ">Log In</button>
             </form>
             <div id="forgotPassword">

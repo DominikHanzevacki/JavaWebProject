@@ -8,7 +8,7 @@ package ProjectTags;
 import Models.LoginHistory;
 import Models.Purchase;
 import SQL.SqlRepository;
-import Sessions.Session;
+import Constants.Constants;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +41,8 @@ public class ViewAllLoginHistoriesTagHandler extends SimpleTagSupport {
             PageContext pageContext = (PageContext) getJspContext();
             HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
             List<LoginHistory> allLoginHistories = new ArrayList();
-            if (request.getSession().getAttribute(Session.FILTERED_LIST) != null) {
-                 allLoginHistories = (List<LoginHistory>) request.getSession().getAttribute(Session.FILTERED_LIST);
+            if (request.getSession().getAttribute(Constants.FILTERED_LIST) != null) {
+                 allLoginHistories = (List<LoginHistory>) request.getSession().getAttribute(Constants.FILTERED_LIST);
             } else {
                 allLoginHistories = sql.selectAllLoginHistories();
             }
