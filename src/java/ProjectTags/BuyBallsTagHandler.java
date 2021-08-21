@@ -37,11 +37,12 @@ public class BuyBallsTagHandler extends SimpleTagSupport {
                     balls.forEach((b) -> {
                         if (bt.getBallTypeID() == b.getIDBallType()) {
                             try {
-                                out.println("<div class=\"col\">");
+                                out.println("<div id=\"BuyBallsForm\" class=\"col\">");
                                 out.println("<form method=\"POST\" action=\"Cart\">");
                                 out.println("<div id=\"Card\" class=\"card border-light h-100 text-dark bg-dark\">");
                                 out.println("<div class=\"card-body\">");
                                 out.println("<h5 class=\"card-title\">" + b.getBallName() + "</h5>");
+                                out.println("<img src=\""+b.getPicture()+"\" alt=\"...\">");
                                 out.println("<p class=\"card-text\">" + "Price: " + b.getBallPrice() + " kn" + "</p>");
                                 out.println("<p class=\"card-text\">" + "Left in stock: " + b.getBallsLeft() + "</p>");
                                 out.println("<p class=\"card-text\">" + "Description: " + "<br>"

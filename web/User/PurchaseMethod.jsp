@@ -1,4 +1,4 @@
-<%@page import="Sessions.Session"%>
+<%@page import="Constants.Constants"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +23,7 @@
                         return actions.order.create({
                             purchase_units: [{
                                     amount: {
-                                        value: <%= session.getAttribute(Session.SUM_OF_PRICES).toString().trim().substring(0, 4)%>
+                                        value: <%= session.getAttribute(Constants.SUM_OF_PRICES).toString().trim().substring(0, 4)%>
                                     }
                                 }]
                         });

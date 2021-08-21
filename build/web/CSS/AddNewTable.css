@@ -1,6 +1,6 @@
 #NewTable {
     position:absolute;
-    top:30%;
+    top:40%;
     left:0;
     right:0;
     bottom:0;
@@ -15,8 +15,8 @@ th {
 }
 
 #buttonsAndInputs {
-    width: 25%;
-    margin-bottom: 30%;
+    width: 27%;
+    margin-bottom: 27%;
     position: absolute;
     margin-left: 9%;
     bottom: 0px;
@@ -38,4 +38,13 @@ button {
     right:0;
     bottom:0;
     text-align: center;
+}
+#Picture{
+    background-color: white;
+    color:grey;
+    width: 100%;
+    margin-left: 1%;
+}
+#PictureRow{
+    width: 80%;
 }

@@ -31,6 +31,7 @@ public class SqlRepository implements Repository {
     private static final String BALLS_LEFT = "BallsLeft";
     private static final String BALLS_DESCRIPTION = "BallsDescription";
     private static final String ID_BALL_TYPE_FK = "IDBallType";
+    private static final String PICTURE = "Picture";
 
     private static final String BALL_TYPE_ID = "BallTypeID";
     private static final String TYPE_OF_BALL = "TypeOfBall";
@@ -51,13 +52,13 @@ public class SqlRepository implements Repository {
     private static final String LOGIN_TIME = "LoginTime";
     private static final String LOGIN_ADDRESS = "LoginAddress";
 
-    private static final String CREATE_BALL = "{ CALL createBall (?,?,?,?,?,?) }";
+    private static final String CREATE_BALL = "{ CALL createBall (?,?,?,?,?,?,?) }";
     private static final String CREATE_BALL_TYPE = "{ CALL createBallType (?,?) }";
     private static final String CREATE_USER = "{ CALL createUsers (?,?,?,?) }";
     private static final String CREATE_PURCHASE = "{ CALL createPurchases (?,?,?,?,?) }";
     private static final String CREATE_LOGIN_HISTORY = "{ CALL createLoginHistory (?,?,?,?) }";
 
-    private static final String UPDATE_BALL = "{ CALL updateBall (?,?,?,?,?,?) }";
+    private static final String UPDATE_BALL = "{ CALL updateBall (?,?,?,?,?,?,?) }";
     private static final String UPDATE_BALL_CATEGORY = "{ CALL updateBallCategory (?,?) }";
 
     private static final String DELETE_BALL = "{ CALL deleteBall (?) }";
@@ -86,10 +87,11 @@ public class SqlRepository implements Repository {
             stmt.setInt(3, ball.getBallsLeft());
             stmt.setString(4, ball.getBallsDescription());
             stmt.setInt(5, ball.getIDBallType());
-            stmt.registerOutParameter(6, Types.INTEGER);
+            stmt.setString(6, ball.getPicture());
+            stmt.registerOutParameter(7, Types.INTEGER);
 
             stmt.executeUpdate();
-            return stmt.getInt(6);
+            return stmt.getInt(7);
         }
     }
 
@@ -167,7 +169,8 @@ public class SqlRepository implements Repository {
             stmt.setInt(3, ball.getBallsLeft());
             stmt.setString(4, ball.getBallsDescription());
             stmt.setInt(5, ball.getIDBallType());
-            stmt.setInt(6, id);
+            stmt.setString(6, ball.getPicture());
+            stmt.setInt(7, id);
 
             stmt.executeUpdate();
         }
@@ -255,7 +258,8 @@ public class SqlRepository implements Repository {
                         rs.getInt(BALL_PRICE),
                         rs.getInt(BALLS_LEFT),
                         rs.getString(BALLS_DESCRIPTION),
-                        rs.getInt(ID_BALL_TYPE_FK)
+                        rs.getInt(ID_BALL_TYPE_FK),
+                        rs.getString(PICTURE)
                 ));
             }
         }
@@ -353,7 +357,8 @@ public class SqlRepository implements Repository {
                         rs.getInt(BALL_PRICE),
                         rs.getInt(BALLS_LEFT),
                         rs.getString(BALLS_DESCRIPTION),
-                        rs.getInt(ID_BALL_TYPE_FK)
+                        rs.getInt(ID_BALL_TYPE_FK),
+                        rs.getString(PICTURE)
                 ));
             }
             return filterBallTypes;
@@ -370,7 +375,7 @@ public class SqlRepository implements Repository {
             stmt.setString(1, loginUser.getUsername());
             stmt.setString(2, loginUser.getPass());
             ResultSet rs = stmt.executeQuery();
-            loginUser = new User (rs.getString(USERNAME),rs.getString(PASSWORD),rs.getString(USER_TYPE));
+            loginUser = new User(rs.getString(USERNAME), rs.getString(PASSWORD), rs.getString(USER_TYPE));
             return loginUser;
         }
 

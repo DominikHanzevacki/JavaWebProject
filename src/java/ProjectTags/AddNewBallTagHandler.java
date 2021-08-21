@@ -36,6 +36,7 @@ public class AddNewBallTagHandler extends SimpleTagSupport {
         try {
             JspWriter out = getJspContext().getOut();
             List<Ball> allBalls = sql.selectAllBalls();
+
             out.println("<thead>");
             out.println("<tr><th scope=\"col\">ID</th>");
             out.println("<th scope=\"col\">Ball Name</th>");
@@ -43,18 +44,22 @@ public class AddNewBallTagHandler extends SimpleTagSupport {
             out.println("<th scope=\"col\">Balls Left</th>");
             out.println("<th scope=\"col\">Balls Description</th>");
             out.println("<th scope=\"col\">Ball Type</th>");
+            out.println("<th scope=\"col\">Picture</th>");
             out.println("</tr>");
             out.println("</thead>");
             out.println("<tbody id=\"ballTable\">");
             allBalls.forEach((b) -> {
                 try {
                     counter++;
-                    out.println("<tr id=\"ballName"+counter+"\" class=\"clickable-row\"><td scope=\"row\">" + b.getBallID() + "</td>");
+                    out.println("<tr id=\"ballName" + counter + "\" class=\"clickable-row\"><td scope=\"row\">" + b.getBallID() + "</td>");
                     out.println("<td>" + b.getBallName() + "</td>");
                     out.println("<td>" + b.getBallPrice() + "</td>");
                     out.println("<td>" + b.getBallsLeft() + "</td>");
                     out.println("<td>" + b.getBallsDescription() + "</td>");
                     out.println("<td>" + b.getIDBallType() + "</td>");
+                    String urlParts[] = b.getPicture().split("/");
+                    String document = urlParts[urlParts.length - 1];
+                    out.println("<td id=\"PictureTD\" name=\""+b.getPicture()+"\">" + document + "</td>");
                     out.println("</tr>");
                 } catch (IOException ex) {
                     Logger.getLogger(AddNewBallTagHandler.class.getName()).log(Level.SEVERE, null, ex);

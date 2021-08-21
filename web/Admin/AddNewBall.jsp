@@ -95,6 +95,16 @@
                             <input type="hidden" id="RowID" name="RowID">
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <b> <p>Picture:</p></b>
+                        </div>
+                        <div id="PictureRow">
+                            <div class="col">
+                                <input type="text" id="Picture" class="fadeIn second" name="Picture" placeholder="Picture">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="crudButtons">
@@ -132,6 +142,7 @@
                             document.getElementById("BallsLeft").value = tableRows[i].getElementsByTagName("td")[3].innerText;
                             document.getElementById("BallDescription").value = tableRows[i].getElementsByTagName("td")[4].innerText;
                             document.getElementById("BallType").value = tableRows[i].getElementsByTagName("td")[5].innerText;
+                            document.getElementById("Picture").value = tableRows[i].getElementsByTagName("td")[6].attributes.name.value;
                         }
                     }
 

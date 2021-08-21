@@ -19,23 +19,26 @@ public class Ball implements Serializable {
     private int BallsLeft;
     private String BallsDescription;
     private int IDBallType;
+    private String Picture;
     private int Ammount;
 
-    public Ball(int BallID, String BallName, int BallPrice, int BallsLeft, String BallsDescription, int IDBallType) {
+    public Ball(int BallID, String BallName, int BallPrice, int BallsLeft, String BallsDescription, int IDBallType, String Picture) {
         this.BallID = BallID;
         this.BallName = BallName;
         this.BallPrice = BallPrice;
         this.BallsLeft = BallsLeft;
         this.BallsDescription = BallsDescription;
         this.IDBallType = IDBallType;
+        this.Picture = Picture;
     }
 
-    public Ball(String BallName, int BallPrice, int BallsLeft, String BallsDescription, int IDBallType) {
+    public Ball(String BallName, int BallPrice, int BallsLeft, String BallsDescription, int IDBallType, String Picture) {
         this.BallName = BallName;
         this.BallPrice = BallPrice;
         this.BallsLeft = BallsLeft;
         this.BallsDescription = BallsDescription;
         this.IDBallType = IDBallType;
+        this.Picture = Picture;
     }
 
     public Ball(int BallID, String BallName, int BallPrice, int BallsLeft, String BallsDescription, int IDBallType, int Ammount) {
@@ -76,6 +79,10 @@ public class Ball implements Serializable {
         this.IDBallType = IDBallType;
     }
 
+    public void setPicture(String Picture) {
+        this.Picture = Picture;
+    }
+
     public int getBallID() {
         return BallID;
     }
@@ -103,6 +110,11 @@ public class Ball implements Serializable {
     public int getAmmount() {
         return Ammount;
     }
+
+    public String getPicture() {
+        return Picture;
+    }
+    
 
     public Ball() {
     }

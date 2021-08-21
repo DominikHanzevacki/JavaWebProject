@@ -7,11 +7,16 @@ package Servlets;
 
 import Models.Ball;
 import SQL.SqlRepository;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 public class BallCRUDServlet extends HttpServlet {
 
     private final SqlRepository sql = new SqlRepository();
+    private String fullPath = "C:/Users/Domi/Desktop/Faks_Predmeti/3. godina/Java Web Project/JavaWebProject/web/Pictures/";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -87,11 +93,12 @@ public class BallCRUDServlet extends HttpServlet {
         String ballsLeft = request.getParameter("BallsLeft");
         String ballsDescription = request.getParameter("BallDescription");
         String ballType = request.getParameter("BallType");
+        String picture = request.getParameter("Picture");
 
         if (!ballName.isEmpty() && !ballsPrice.isEmpty() && !ballsLeft.isEmpty() && !ballsDescription.isEmpty() && !ballType.isEmpty()) {
             if (createButton != null) {
 
-                Ball ball = new Ball(ballName, Integer.parseInt(ballsPrice), Integer.parseInt(ballsLeft), ballsDescription, Integer.parseInt(ballType));
+                Ball ball = new Ball(ballName, Integer.parseInt(ballsPrice), Integer.parseInt(ballsLeft), ballsDescription, Integer.parseInt(ballType), picture);
                 try {
                     sql.createBall(ball);
                 } catch (Exception ex) {
@@ -100,7 +107,7 @@ public class BallCRUDServlet extends HttpServlet {
             } else if (UpdateButton != null) {
                 try {
 
-                    Ball updatedBall = new Ball(ballName, Integer.parseInt(ballsPrice), Integer.parseInt(ballsLeft), ballsDescription, Integer.parseInt(ballType));
+                    Ball updatedBall = new Ball(ballName, Integer.parseInt(ballsPrice), Integer.parseInt(ballsLeft), ballsDescription, Integer.parseInt(ballType), picture);
                     sql.updateBall(Integer.valueOf(tableRowID), updatedBall);
                 } catch (Exception ex) {
                     Logger.getLogger(BallCRUDServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -111,6 +118,15 @@ public class BallCRUDServlet extends HttpServlet {
                 } catch (Exception ex) {
                     Logger.getLogger(BallCRUDServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+            if (!picture.isEmpty()) {
+                URL url = new URL(picture);
+                BufferedImage image = ImageIO.read(url.openStream());
+                String urlParts[] = picture.split("/");
+                String document = urlParts[urlParts.length - 1];
+                String ext = picture.substring(picture.length() - 3);
+                ImageIO.write(image, ext, new File(fullPath + document));
+
             }
         }
         response.sendRedirect("Admin/AddNewBall.jsp");
