@@ -48,3 +48,6 @@ button {
 #PictureRow{
     width: 80%;
 }
+.SelectedRow {
+  color: grey;
+}

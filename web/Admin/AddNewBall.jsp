@@ -143,6 +143,9 @@
                             document.getElementById("BallDescription").value = tableRows[i].getElementsByTagName("td")[4].innerText;
                             document.getElementById("BallType").value = tableRows[i].getElementsByTagName("td")[5].innerText;
                             document.getElementById("Picture").value = tableRows[i].getElementsByTagName("td")[6].attributes.name.value;
+                            tableRows[i].attributes.class.value = tableRows[i].attributes.class.value + ' SelectedRow';
+                        } else {
+                            tableRows[i].classList.remove("SelectedRow");
                         }
                     }
 

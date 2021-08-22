@@ -39,3 +39,6 @@ button {
     bottom:0;
     text-align: center;
 }
+.SelectedRow {
+  color: grey;
+}

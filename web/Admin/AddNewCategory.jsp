@@ -94,6 +94,9 @@
                         if (e.currentTarget.id === tableRows[i].id) {
                             document.getElementById("RowID").value = tableRows[i].getElementsByTagName("td")[0].innerText;
                             document.getElementById("TypeOfBall").value = tableRows[i].getElementsByTagName("td")[1].innerText;
+                            tableRows[i].attributes.class.value = tableRows[i].attributes.class.value + ' SelectedRow';
+                        } else {
+                            tableRows[i].classList.remove("SelectedRow");
                         }
                     }
                 });
